@@ -74,11 +74,16 @@ class Movie implements IMovieBasicData, IMovieExtraData {
 
   vote_count?: number;
 
-  constructor(initialData: IMovieBasicData) {
+  constructor(initialData: IMovieBasicData, extraData ?: IMovieExtraData) {
     this.id = initialData.id;
     this.poster_path = initialData.poster_path;
     this.title = initialData.title;
     this.original_title = initialData.original_title;
+    if (extraData) {
+      Object.keys(extraData).forEach((/* e */) => {
+        // this[e] = extraData[e];
+      });
+    }
   }
 
   static fromJson(data: any): Movie {
@@ -88,8 +93,9 @@ class Movie implements IMovieBasicData, IMovieExtraData {
       title: data.title,
       original_title: data.original_title,
     };
+    const extraData: IMovieExtraData = { ...data };
 
-    return new Movie(initialData);
+    return new Movie(initialData, extraData);
   }
 }
 
