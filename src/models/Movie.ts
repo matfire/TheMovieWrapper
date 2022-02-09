@@ -19,7 +19,7 @@ interface IMovieExtraData {
     original_language?: string;
     overview?: string;
     popularity?: number;
-    release_data?: Date;
+    release_date?: Date;
     revenue?: number;
     runtime?: number;
     status?: MovieStatus;
@@ -58,7 +58,7 @@ class Movie implements IMovieBasicData, IMovieExtraData {
 
   popularity?: number;
 
-  release_data?: Date;
+  release_date?: Date;
 
   revenue?: number;
 
@@ -80,20 +80,39 @@ class Movie implements IMovieBasicData, IMovieExtraData {
     this.title = initialData.title;
     this.original_title = initialData.original_title;
     if (extraData) {
-      Object.keys(extraData).forEach((/* e */) => {
-        // this[e] = extraData[e];
-      });
+      this.readExtraData(extraData);
     }
   }
 
-  static fromJson(data: any): Movie {
+  private readExtraData(data: IMovieExtraData) {
+    this.adult = data.adult ?? undefined;
+    this.backdrop_path = data.backdrop_path ?? undefined;
+    this.belongs_to_collection = data.belongs_to_collection ?? undefined;
+    this.budget = data.budget ?? undefined;
+    this.homepage = data.homepage ?? undefined;
+    this.imdb_id = data.imdb_id ?? undefined;
+    this.original_language = data.original_language ?? undefined;
+    this.overview = data.overview ?? undefined;
+    this.popularity = data.popularity ?? undefined;
+    this.release_date = data.release_date ? new Date(data.release_date) : undefined;
+    this.revenue = data.revenue ?? undefined;
+    this.runtime = data.runtime ?? undefined;
+    this.status = data.status ?? 'Rumored';
+    this.tagline = data.tagline ?? undefined;
+    this.video = data.video ?? undefined;
+    this.vote_average = data.vote_average ?? undefined;
+    this.vote_count = data.vote_count ?? undefined;
+  }
+
+  static fromJson(data: any, extra = false): Movie {
     const initialData = {
       id: data.id,
       poster_path: data.poster_path,
       title: data.title,
       original_title: data.original_title,
     };
-    const extraData: IMovieExtraData = { ...data };
+
+    const extraData: IMovieExtraData = extra ? { ...data } : undefined;
 
     return new Movie(initialData, extraData);
   }
