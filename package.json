@@ -1,8 +1,7 @@
 {
-  "name": "tmdb_api",
-  "version": "1.0.0",
+  "name": "the_movie_wrapper",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "build": "npx tsc",
     "prepare": "husky install",
