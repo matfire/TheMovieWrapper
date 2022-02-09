@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import TrendingTimeSpan from '../types/generic';
+import { TrendingTimeSpan, TrendingType } from '../types/generic';
 import Movie from './Movie';
 
 class API {
@@ -7,14 +7,9 @@ class API {
 
   $http: AxiosInstance;
 
-  constructor(apiKey:string) {
+  constructor(apiKey: string) {
     this.apiKey = apiKey;
     this.$http = axios.create({ baseURL: 'https://api.themoviedb.org/3', params: { api_key: apiKey } });
-  }
-
-  async getTrending(timeSpan: TrendingTimeSpan): Promise<Movie[]> {
-    const res = await this.$http.get(`/trending/all/${timeSpan}`);
-    return res.data.results.map((e: any) => Movie.fromJson(e));
   }
 
   async getAuthenticationToken(): Promise<string> {
@@ -31,12 +26,20 @@ class API {
     return `https://www.themoviedb.org/authenticate/${token}?redirect_to=${redirectUrl}`;
   }
 
-  async createSession(requestToken:string): Promise<string> {
+  async createSession(requestToken: string): Promise<string> {
     const res = await this.$http.post('/authentication/session/new', { request_token: requestToken });
     if (!res.data.success) {
       throw new Error('Could not get session id');
     }
     return res.data.session_id;
+  }
+
+  async getTrending(type: TrendingType, timeSpan: TrendingTimeSpan): Promise<Movie[] | any > {
+    const res = await this.$http.get(`/trending/${type}/${timeSpan}`);
+    if (type === 'movie') {
+      return res.data.results.map((e: any) => Movie.fromJson(e));
+    }
+    return [];
   }
 }
 
