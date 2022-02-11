@@ -1,4 +1,4 @@
-import { AxiosInstance } from "axios";
+import { AxiosInstance } from 'axios';
 
 class AuthenticationService {
   $http: AxiosInstance;

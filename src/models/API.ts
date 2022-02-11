@@ -1,7 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
 import AuthenticationService from '../services/authentication';
-import TrendingTimeSpan from '../types/generic';
-import Movie from './Movie';
 
 class API {
   apiKey: string;
