@@ -46,7 +46,7 @@ class Movie implements IMovieBasicData, IMovieExtraData {
 
   budget?: number;
 
-  genres?: Genre[];
+  genres: Genre[] = [];
 
   homepage?: string;
 
@@ -113,7 +113,6 @@ class Movie implements IMovieBasicData, IMovieExtraData {
     };
 
     const extraData: IMovieExtraData = extra ? { ...data } : undefined;
-
     return new Movie(initialData, extraData);
   }
 }
