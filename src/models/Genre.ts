@@ -7,6 +7,10 @@ class Genre {
     this.id = id;
     this.name = name;
   }
+
+  static fromJson(data: any): Genre {
+    return new Genre(data.id, data.name);
+  }
 }
 
 export default Genre;
