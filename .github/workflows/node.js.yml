@@ -26,5 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+      env:
+        TMDB_KEY: ${{ secrets.TMDB_KEY }}
     - run: npm run build --if-present
     - run: npm test
