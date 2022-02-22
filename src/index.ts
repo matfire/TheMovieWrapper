@@ -1,3 +1,3 @@
-import API from './models/API';
+import API from './API';
 
 export default API;

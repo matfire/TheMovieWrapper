@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "build": "npx tsc",
+    "build": "npx tsc -p tsconfig.build.json",
     "prepare": "husky install",
     "lint": "npx eslint src/**/*.ts --fix",
     "test": "jest"
