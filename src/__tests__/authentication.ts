@@ -4,7 +4,7 @@ let client: API;
 
 // eslint-disable-next-line no-undef
 beforeAll(() => {
-  client = new API(process.env.TMDB_KEY!, false);
+  client = new API(process.env.TMDB_KEY!, true);
 });
 
 // eslint-disable-next-line no-undef
