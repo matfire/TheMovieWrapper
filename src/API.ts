@@ -33,7 +33,7 @@ class API {
     }
 
     this.auth = new AuthenticationService(this.$http);
-    this.movies = new MovieService(this.$http);
+    this.movies = new MovieService(this);
   }
 }
 
