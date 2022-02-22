@@ -1,4 +1,5 @@
 import { AxiosInstance } from 'axios';
+import API from '..';
 import Movie from '../models/Movie';
 import TrendingTimeSpan from '../types/generic';
 import { TrendingMovie } from '../types/movie';
@@ -6,15 +7,15 @@ import { TrendingMovie } from '../types/movie';
 class MovieService {
   session_id?: string;
 
-  $http: AxiosInstance;
+  api: API;
 
-  constructor(httpClient: AxiosInstance) {
-    this.$http = httpClient;
+  constructor(client: API) {
+    this.api = client;
   }
 
   async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<TrendingMovie> {
-    const { data } = await this.$http.get(`/trending/movie/${timeSpan}`, {
-      params: { ...this.$http.defaults.params, page },
+    const { data } = await this.api.$http.get(`/trending/movie/${timeSpan}`, {
+      params: { page },
     });
     return {
       total_pages: data.total_pages,
