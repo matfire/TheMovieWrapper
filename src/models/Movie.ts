@@ -46,7 +46,7 @@ class Movie implements IMovieBasicData, IMovieExtraData {
 
   budget?: number;
 
-  genres?: Genre[];
+  genres: Genre[] = [];
 
   homepage?: string;
 
@@ -85,23 +85,23 @@ class Movie implements IMovieBasicData, IMovieExtraData {
   }
 
   private readExtraData(data: IMovieExtraData) {
-    this.adult = data.adult ?? undefined;
-    this.backdrop_path = data.backdrop_path ?? undefined;
-    this.belongs_to_collection = data.belongs_to_collection ?? undefined;
-    this.budget = data.budget ?? undefined;
-    this.homepage = data.homepage ?? undefined;
-    this.imdb_id = data.imdb_id ?? undefined;
-    this.original_language = data.original_language ?? undefined;
-    this.overview = data.overview ?? undefined;
-    this.popularity = data.popularity ?? undefined;
+    this.adult = data.adult;
+    this.backdrop_path = data.backdrop_path;
+    this.belongs_to_collection = data.belongs_to_collection;
+    this.budget = data.budget;
+    this.homepage = data.homepage;
+    this.imdb_id = data.imdb_id;
+    this.original_language = data.original_language;
+    this.overview = data.overview;
+    this.popularity = data.popularity;
     this.release_date = data.release_date ? new Date(data.release_date) : undefined;
-    this.revenue = data.revenue ?? undefined;
-    this.runtime = data.runtime ?? undefined;
+    this.revenue = data.revenue;
+    this.runtime = data.runtime;
     this.status = data.status ?? 'Rumored';
-    this.tagline = data.tagline ?? undefined;
-    this.video = data.video ?? undefined;
-    this.vote_average = data.vote_average ?? undefined;
-    this.vote_count = data.vote_count ?? undefined;
+    this.tagline = data.tagline;
+    this.video = data.video;
+    this.vote_average = data.vote_average;
+    this.vote_count = data.vote_count;
   }
 
   static fromJson(data: any, extra = false): Movie {
@@ -113,7 +113,6 @@ class Movie implements IMovieBasicData, IMovieExtraData {
     };
 
     const extraData: IMovieExtraData = extra ? { ...data } : undefined;
-
     return new Movie(initialData, extraData);
   }
 }
