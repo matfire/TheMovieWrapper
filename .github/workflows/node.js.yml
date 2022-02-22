@@ -30,5 +30,4 @@ jobs:
         TMDB_KEY: ${{ secrets.TMDB_KEY }}
     - run: npm install typescript
     - run: npm run build --if-present
-    - run: npm run lint
     - run: npm test
