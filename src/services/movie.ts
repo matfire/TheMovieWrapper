@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import Axios, { AxiosInstance } from 'axios';
 import Movie from '../models/Movie';
 import TrendingTimeSpan from '../types/generic';
 import { TrendingMovie } from '../types/movie';
@@ -9,7 +9,7 @@ class MovieService {
   $http: AxiosInstance;
 
   constructor(httpClient: AxiosInstance) {
-    this.$http = httpClient;
+    this.$http = Axios.create({...httpClient.defaults});
   }
 
   async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<TrendingMovie> {
