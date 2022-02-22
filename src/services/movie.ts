@@ -8,8 +8,8 @@ class MovieService {
 
   $http: AxiosInstance;
 
-  constructor(httpClient: AxiosInstance) {
-    this.$http = Axios.create(httpClient.defaults);
+  constructor(config: {baseUrl: string, params: {api_key: string}}) {
+    this.$http = Axios.create(config);
   }
 
   async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<TrendingMovie> {
