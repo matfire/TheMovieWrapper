@@ -14,7 +14,7 @@ class MovieService {
 
   async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<TrendingMovie> {
     const { data } = await this.$http.get(`/trending/movie/${timeSpan}`, {
-      // params: { page },
+      params: { ...this.$http.defaults.params, page },
     });
     return {
       total_pages: data.total_pages,
