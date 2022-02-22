@@ -20,6 +20,16 @@ class API {
     this.logger = $log;
     this.logger.name = 'TheMovieGetter';
     this.logger.level = 'debug';
+
+    this.$http.interceptors.request.use(((config) => {
+      const copy = { ...config };
+      copy.params = {
+        api_key: apiKey,
+        ...config.params,
+      };
+      return copy;
+    }));
+
     if (testing) {
       this.$http.interceptors.response.use((value) => {
         this.logger.info(`${value.config.url}`);
