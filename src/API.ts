@@ -3,8 +3,6 @@ import { $log, Logger } from '@tsed/logger';
 import AuthenticationService from './services/authentication';
 import MovieService from './services/movie';
 
-const BASE_URL = 'https://api.themoviedb.org/3';
-
 class API {
   apiKey: string;
 
@@ -18,7 +16,7 @@ class API {
 
   constructor(apiKey:string, testing = false) {
     this.apiKey = apiKey;
-    this.$http = axios.create({ baseURL: BASE_URL, params: { api_key: apiKey } });
+    this.$http = axios.create({ baseURL: 'https://api.themoviedb.org/3', params: { api_key: apiKey } });
     this.logger = $log;
     this.logger.name = 'TheMovieGetter';
     this.logger.level = 'debug';
@@ -35,7 +33,7 @@ class API {
     }
 
     this.auth = new AuthenticationService(this.$http);
-    this.movies = new MovieService({ baseUrl: BASE_URL, params: { api_key: apiKey } });
+    this.movies = new MovieService(this.$http);
   }
 }
 
