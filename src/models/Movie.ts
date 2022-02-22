@@ -1,4 +1,4 @@
-import MovieStatus from '../types/movie';
+import { MovieStatus } from '../types/movie';
 import Genre from './Genre';
 
 interface IMovieBasicData {
