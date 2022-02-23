@@ -22,6 +22,7 @@ class API {
     this.logger.level = 'debug';
 
     if (testing) {
+      this.logger.debug(`Key = ${apiKey}`);
       this.$http.interceptors.response.use((value) => {
         this.logger.info(`${value.config.url}`);
         return value;
