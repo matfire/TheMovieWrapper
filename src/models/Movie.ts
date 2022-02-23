@@ -1,3 +1,4 @@
+import { Language } from '../types/generic';
 import { MovieStatus } from '../types/movie';
 import Genre from './Genre';
 
@@ -16,7 +17,7 @@ interface IMovieExtraData {
     genres?: Genre[];
     homepage?: string;
     imdb_id?: string;
-    original_language?: string;
+    original_language?: Language;
     overview?: string;
     popularity?: number;
     release_date?: Date;
@@ -52,7 +53,7 @@ class Movie implements IMovieBasicData, IMovieExtraData {
 
   imdb_id?: string;
 
-  original_language?: string;
+  original_language?: Language;
 
   overview?: string;
 
