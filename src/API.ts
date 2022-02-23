@@ -16,7 +16,7 @@ class API {
 
   constructor(apiKey:string, testing = false) {
     this.apiKey = apiKey;
-    this.$http = axios.create({ baseURL: 'https://api.themoviedb.org/3', params: { api_key: apiKey } });
+    this.$http = axios.create({ baseURL: 'https://api.themoviedb.org/3', params: { test: 'toto', api_key: apiKey } });
     this.logger = $log;
     this.logger.name = 'TheMovieGetter';
     this.logger.level = 'debug';
