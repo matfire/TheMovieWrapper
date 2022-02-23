@@ -104,15 +104,10 @@ class Movie implements IMovieBasicData, IMovieExtraData {
     this.vote_count = data.vote_count;
   }
 
-  static fromJson(data: any, extra = false): Movie {
-    const initialData = {
-      id: data.id,
-      poster_path: data.poster_path,
-      title: data.title,
-      original_title: data.original_title,
-    };
+  static fromJson(data: any): Movie {
+    const initialData: IMovieBasicData = { ...data };
 
-    const extraData: IMovieExtraData = extra ? { ...data } : undefined;
+    const extraData: IMovieExtraData = { ...data };
     return new Movie(initialData, extraData);
   }
 }
