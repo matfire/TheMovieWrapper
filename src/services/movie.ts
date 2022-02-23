@@ -15,7 +15,7 @@ class MovieService {
   }
 
   async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<TrendingMovieResult> {
-    const { data } = await this.$http.get(`/trending/movie/${timeSpan}`, { params: { ...this.$http.defaults.params, page } });
+    const { data } = await this.$http.get(`/trending/movie/${timeSpan}`, { params: { ...this.$http.defaults.params, page, language: this.language } });
     return {
       total_pages: data.total_pages,
       total_results: data.total_results,
@@ -32,6 +32,11 @@ class MovieService {
       total_pages: data.total_pages,
       results: data.results.map((e:any) => Movie.fromJson(e)),
     };
+  }
+
+  async getMovie(id: number): Promise<Movie> {
+    const { data } = await this.$http.get(`/movie/${id}`, { params: { ...this.$http.defaults.params, language: this.language } });
+    return Movie.fromJson(data);
   }
 
   setSessionId(sId: string) {
