@@ -47,7 +47,7 @@ class MovieService {
   }
 
   async getNowPlaying(): Promise<NowPlayingMovieResult> {
-    const { data } = await this.$http.get('/movie/now_playing', {params: {...this.$http.defaults.params, language: this.language }});
+    const { data } = await this.$http.get('/movie/now_playing', { params: { ...this.$http.defaults.params, language: this.language } });
 
     return {
       page: data.page,
