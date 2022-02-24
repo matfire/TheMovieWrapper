@@ -25,6 +25,17 @@ interface SearchMovieResult {
   results: Movie[]
 }
 
+interface NowPlayingMovieResult {
+  page: number;
+  total_pages: number;
+  total_results: number;
+  results: Movie[];
+  dates: {
+    maximum: Date;
+    minimum: Date;
+  }
+}
+
 export {
-  MovieStatus, TrendingMovieResult, SearchMovieInput, SearchMovieResult,
+  MovieStatus, TrendingMovieResult, SearchMovieInput, SearchMovieResult, NowPlayingMovieResult,
 };
