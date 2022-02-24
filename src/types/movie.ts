@@ -1,4 +1,4 @@
-import Movie from '../models/Movie';
+import Movie from '../models/movie/Movie';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled';
 

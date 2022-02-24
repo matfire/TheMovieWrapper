@@ -1,6 +1,6 @@
-import { Language } from '../types/generic';
-import { MovieStatus } from '../types/movie';
-import Genre from './Genre';
+import { Language } from '../../types/generic';
+import { MovieStatus } from '../../types/movie';
+import Genre from '../Genre';
 
 interface IMovieBasicData {
     id: string;

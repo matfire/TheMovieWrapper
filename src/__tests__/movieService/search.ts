@@ -27,3 +27,4 @@ test('search with params', async () => {
   // eslint-disable-next-line no-undef
   expect(clientRes.total_results).toBe(1);
 });
+

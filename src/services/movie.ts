@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import Movie from '../models/Movie';
+import Movie from '../models/movie/Movie';
 import { Language, TrendingTimeSpan } from '../types/generic';
 import { SearchMovieInput, SearchMovieResult, TrendingMovieResult } from '../types/movie';
 
@@ -36,6 +36,11 @@ class MovieService {
 
   async getMovie(id: number): Promise<Movie> {
     const { data } = await this.$http.get(`/movie/${id}`, { params: { ...this.$http.defaults.params, language: this.language } });
+    return Movie.fromJson(data);
+  }
+
+  async getLatest(): Promise<Movie> {
+    const { data } = await this.$http.get('/movie/latest', { params: { ...this.$http.defaults.params, language: this.language } });
     return Movie.fromJson(data);
   }
 
