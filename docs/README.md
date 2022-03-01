@@ -16,5 +16,5 @@ Check [Available Services](services.md)
 
 If you liked this library and want to help me repay the coffee debt I created while working on it, you can always
 <!-- ko-fi :id=matteogassend :color=red -->
-    Support Me on Ko-fi
+    Buy me a coffee
 <!-- ko-fi -->
