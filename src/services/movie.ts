@@ -2,7 +2,8 @@ import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
 import { Language, TrendingTimeSpan } from '../types/generic';
 import {
-  SearchMovieInput, SearchMovieResult, TrendingMovieResult, NowPlayingMovieResult,
+  SearchMovieInput, SearchMovieResult, TrendingMovieResult, 
+  NowPlayingMovieResult, AlternativeTitlesResult, AlternativeTitlesInput,
 } from '../types/movie';
 
 class MovieService {
@@ -58,6 +59,15 @@ class MovieService {
         minimum: new Date(data.dates.minimum),
       },
       results: data.results.map((e: any) => Movie.fromJson(e)),
+    };
+  }
+
+  async getAlternativeTitles(titleData: AlternativeTitlesInput): Promise<AlternativeTitlesResult> {
+    const { data } = await this.$http.get(`/movie/${titleData.movieId}/alternative_titles`, { params: { ...this.$http.defaults.params, country: titleData.country } });
+
+    return {
+      id: data.id,
+      titles: [...data.titles],
     };
   }
 

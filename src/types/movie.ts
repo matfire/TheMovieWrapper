@@ -36,6 +36,21 @@ interface NowPlayingMovieResult {
   }
 }
 
+interface AlternativeTitlesInput {
+  movieId: string;
+  country ?: string; // TODO create proper type for iso_3166_1
+}
+
+interface AlternativeTitlesResult {
+  id: number;
+  titles: {
+    iso_3166_1: string, // TODO create proper type for iso_3166_1
+    title: string,
+    type: string
+  }[]
+}
+
 export {
   MovieStatus, TrendingMovieResult, SearchMovieInput, SearchMovieResult, NowPlayingMovieResult,
+  AlternativeTitlesResult, AlternativeTitlesInput,
 };
