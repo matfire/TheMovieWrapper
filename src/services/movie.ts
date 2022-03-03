@@ -2,9 +2,9 @@ import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
 import { Language, TrendingTimeSpan } from '../types/generic';
 import {
-  SearchMovieInput, SearchMovieResult, 
+  SearchMovieInput, SearchMovieResult,
   TrendingMovieResult,
-  NowPlayingMovieResult, 
+  NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput,
   ChangesInput, ChangesResult,
 } from '../types/movie';
