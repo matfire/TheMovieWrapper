@@ -50,7 +50,28 @@ interface AlternativeTitlesResult {
   }[]
 }
 
+interface ChangesInput {
+  movieId: string;
+  start_date?: string;
+  end_date?: string;
+  page?: number
+}
+
+interface ChangesResult {
+  changes: {
+    key: string,
+    items: {
+      id: string;
+      action: string;
+      time: string;
+      iso_639_1: string; // TODO create proper type for iso_639_1
+      value: string;
+      original_value: string;
+    }[]
+  }[]
+}
+
 export {
   MovieStatus, TrendingMovieResult, SearchMovieInput, SearchMovieResult, NowPlayingMovieResult,
-  AlternativeTitlesResult, AlternativeTitlesInput,
+  AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
 };

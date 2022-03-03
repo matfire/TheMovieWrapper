@@ -2,8 +2,11 @@ import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
 import { Language, TrendingTimeSpan } from '../types/generic';
 import {
-  SearchMovieInput, SearchMovieResult, TrendingMovieResult,
-  NowPlayingMovieResult, AlternativeTitlesResult, AlternativeTitlesInput,
+  SearchMovieInput, SearchMovieResult, 
+  TrendingMovieResult,
+  NowPlayingMovieResult, 
+  AlternativeTitlesResult, AlternativeTitlesInput,
+  ChangesInput, ChangesResult,
 } from '../types/movie';
 
 class MovieService {
@@ -68,6 +71,21 @@ class MovieService {
     return {
       id: data.id,
       titles: [...data.titles],
+    };
+  }
+
+  async getChanges(changesData: ChangesInput): Promise<ChangesResult> {
+    const { data } = await this.$http.get(`/movie/${changesData.movieId}/changes`, {
+      params: {
+        ...this.$http.defaults.params,
+        start_date: changesData.start_date,
+        end_date: changesData.end_date,
+        page: changesData.page,
+      },
+    });
+
+    return {
+      changes: data.changes,
     };
   }
 
