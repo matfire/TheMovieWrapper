@@ -7,6 +7,7 @@ import {
   NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput,
   ChangesInput, ChangesResult,
+  ExternalIdsResult,
 } from '../types/movie';
 
 class MovieService {
@@ -87,6 +88,11 @@ class MovieService {
     return {
       changes: data.changes,
     };
+  }
+
+  async getExternalIds(movieId: string): Promise<ExternalIdsResult> {
+    const { data } = await this.$http.get(`/movie/${movieId}/external_ids`);
+    return data as ExternalIdsResult;
   }
 
   setSessionId(sId: string) {

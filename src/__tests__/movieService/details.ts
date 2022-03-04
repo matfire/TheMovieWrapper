@@ -22,9 +22,16 @@ test('get alternative titles for movie', async () => {
   expect(clientRes.titles.length).toBe(httpRes.data.titles.length);
 });
 
-test('get changes for movie', async() => {
+test('get changes for movie', async () => {
   const clientRes = await client.movies.getChanges({ movieId: '299564' });
   const httpRes = await client.$http.get('/movie/299564/changes');
 
   expect(clientRes.changes.length).toBe(httpRes.data.changes.length);
+});
+
+test('get external ids for movie', async () => {
+  const clientRes = await client.movies.getExternalIds('299564');
+  const httpRes = await client.$http.get('/movie/299564/external_ids');
+
+  expect(clientRes).toStrictEqual(httpRes.data);
 });

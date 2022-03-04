@@ -71,7 +71,16 @@ interface ChangesResult {
   }[]
 }
 
+interface ExternalIdsResult {
+  imdb_id ?: string;
+  facebook_id ?: string;
+  instagram_id ?: string;
+  twitter_id ?: string;
+  id ?: number;
+}
+
 export {
   MovieStatus, TrendingMovieResult, SearchMovieInput, SearchMovieResult, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
+  ExternalIdsResult,
 };
