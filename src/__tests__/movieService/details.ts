@@ -49,3 +49,10 @@ test('get lists for movie', async () => {
 
   expect(clientRes).toStrictEqual(httpRes.data);
 });
+
+test('get recommendations for movie', async () => {
+  const clientRes = await client.movies.getRecommendations({ movieId: '299564' });
+  const httpRes = await client.$http.get('/movie/299564/recommendations');
+
+  expect(clientRes).toStrictEqual(httpRes.data);
+});

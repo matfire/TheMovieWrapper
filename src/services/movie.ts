@@ -2,14 +2,13 @@ import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
 import { KeywordResult, Language, TrendingTimeSpan } from '../types/generic';
 import {
-  SearchMovieInput, SearchMovieResult,
-  TrendingMovieResult,
+  SearchMovieInput, MovieListResult,
   NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput,
   ChangesInput, ChangesResult,
   ExternalIdsResult,
   ListResult,
-  ListInput,
+  MoviePageInput,
 } from '../types/movie';
 
 class MovieService {
@@ -23,7 +22,7 @@ class MovieService {
     this.$http = client;
   }
 
-  async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<TrendingMovieResult> {
+  async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<MovieListResult> {
     const { data } = await this.$http.get(`/trending/movie/${timeSpan}`, { params: { ...this.$http.defaults.params, page, language: this.language } });
     return {
       total_pages: data.total_pages,
@@ -33,7 +32,7 @@ class MovieService {
     };
   }
 
-  async search(input: SearchMovieInput): Promise<SearchMovieResult> {
+  async search(input: SearchMovieInput): Promise<MovieListResult> {
     const { data } = await this.$http.get('/search/movie', { params: { ...this.$http.defaults.params, language: this.language, ...input } });
     return {
       page: input.page || 1,
@@ -108,9 +107,14 @@ class MovieService {
     return data as KeywordResult;
   }
 
-  async getLists(listData: ListInput): Promise<ListResult> {
-    const { data } = await this.$http.get(`/movie/${listData.movieId}/lists`, { params: { ...this.$http.defaults.params, language: this.language, page: listData.page || 1 } });
+  async getLists(listData: MoviePageInput): Promise<ListResult> {
+    const { data } = await this.$http.get(`/movie/${listData.movieId}/lists`, { params: { ...this.$http.defaults.params, language: this.language, page: listData.page } });
     return data as ListResult;
+  }
+
+  async getRecommendations(recommendationsData: MoviePageInput): Promise<MovieListResult> {
+    const { data } = await this.$http.get(`/movie/${recommendationsData.movieId}/recommendations`, { params: { ...this.$http.defaults.params, language: this.language, page: recommendationsData.page } });
+    return data as MovieListResult;
   }
 
   setSessionId(sId: string) {

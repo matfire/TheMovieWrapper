@@ -12,14 +12,7 @@ interface SearchMovieInput {
   primary_release_year ?: number;
 }
 
-interface TrendingMovieResult {
-  page: number;
-  total_pages: number;
-  total_results: number;
-  results: Movie[]
-}
-
-interface SearchMovieResult {
+interface MovieListResult {
   page: number;
   total_pages: number;
   total_results: number;
@@ -51,11 +44,14 @@ interface AlternativeTitlesResult {
   }[]
 }
 
-interface ChangesInput {
+interface MoviePageInput {
   movieId: string;
+  page?: number;
+}
+
+interface ChangesInput extends MoviePageInput {
   start_date?: Date;
   end_date?: Date;
-  page?: number
 }
 
 interface ChangesResult {
@@ -80,11 +76,6 @@ interface ExternalIdsResult {
   id ?: number;
 }
 
-interface ListInput {
-  movieId: string;
-  page?: number;
-}
-
 interface ListResult {
   id: number;
   page: number;
@@ -94,7 +85,7 @@ interface ListResult {
 }
 
 export {
-  MovieStatus, TrendingMovieResult, SearchMovieInput, SearchMovieResult, NowPlayingMovieResult,
+  MovieStatus, SearchMovieInput, MovieListResult, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
-  ExternalIdsResult, ListResult, ListInput,
+  ExternalIdsResult, ListResult, MoviePageInput,
 };
