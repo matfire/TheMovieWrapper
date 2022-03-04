@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
-import { Language, TrendingTimeSpan } from '../types/generic';
+import { KeywordResult, Language, TrendingTimeSpan } from '../types/generic';
 import {
   SearchMovieInput, SearchMovieResult,
   TrendingMovieResult,
@@ -90,9 +90,18 @@ class MovieService {
     };
   }
 
+  // TODO Credits Go Here
+
   async getExternalIds(movieId: string): Promise<ExternalIdsResult> {
     const { data } = await this.$http.get(`/movie/${movieId}/external_ids`);
     return data as ExternalIdsResult;
+  }
+
+  // TODO Images Go Here
+
+  async getKeyword(movieId: string): Promise<KeywordResult> {
+    const { data } = await this.$http.get(`/movie/${movieId}/keywords`);
+    return data as KeywordResult;
   }
 
   setSessionId(sId: string) {
