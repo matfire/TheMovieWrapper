@@ -115,12 +115,29 @@ class MovieService {
 
   async getRecommendations(recommendationsData: MoviePageInput): Promise<MovieListResult> {
     const { data } = await this.$http.get(`/movie/${recommendationsData.movieId}/recommendations`, { params: { ...this.$http.defaults.params, language: this.language, page: recommendationsData.page } });
-    return data as MovieListResult;
+    return {
+      page: data.page,
+      total_pages: data.total_pages,
+      total_results: data.total_results,
+      results: data.results.map((e: any) => Movie.fromJson(e)),
+    };
   }
 
   async getReleaseDates(movieId: string): Promise<ReleaseDateResults> {
     const { data } = await this.$http.get(`/movie/${movieId}/release_dates`);
     return data as ReleaseDateResults;
+  }
+
+  // TODO Reviews Go Here
+
+  async getSimilar(similarData: MoviePageInput): Promise<MovieListResult> {
+    const { data } = await this.$http.get(`/movie/${similarData.movieId}/similar`, { params: { ...this.$http.defaults.params, language: this.language, page: similarData.page } });
+    return {
+      page: data.page,
+      total_pages: data.total_pages,
+      total_results: data.total_results,
+      results: data.results.map((e: any) => Movie.fromJson(e)),
+    };
   }
 
   setSessionId(sId: string) {

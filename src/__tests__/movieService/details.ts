@@ -63,3 +63,10 @@ test('get release dates for movie', async () => {
 
   expect(clientRes).toStrictEqual(httpRes.data);
 });
+
+test('get similar movies for movie', async () => {
+  const clientRes = await client.movies.getSimilar({movieId: '299564'});
+  const httpRes = await client.$http.get('/movie/299564/similar');
+
+  expect(clientRes).toStrictEqual(httpRes.data);
+});
