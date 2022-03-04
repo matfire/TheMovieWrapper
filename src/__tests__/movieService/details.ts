@@ -23,7 +23,7 @@ test('get alternative titles for movie', async () => {
 });
 
 test('get changes for movie', async () => {
-  const clientRes = await client.movies.getChanges({ movieId: '299564' });
+  const clientRes = await client.movies.getChanges({ movieId: '299564', start_date: new Date('12/03/2001') });
   const httpRes = await client.$http.get('/movie/299564/changes');
 
   expect(clientRes.changes.length).toBe(httpRes.data.changes.length);
