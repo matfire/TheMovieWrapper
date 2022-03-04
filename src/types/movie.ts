@@ -52,8 +52,8 @@ interface AlternativeTitlesResult {
 
 interface ChangesInput {
   movieId: string;
-  start_date?: string;
-  end_date?: string;
+  start_date?: Date;
+  end_date?: Date;
   page?: number
 }
 
@@ -63,7 +63,7 @@ interface ChangesResult {
     items: {
       id: string;
       action: string;
-      time: string;
+      time: Date;
       iso_639_1: string; // TODO create proper type for iso_639_1
       value: string;
       original_value: string;
