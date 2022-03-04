@@ -56,3 +56,10 @@ test('get recommendations for movie', async () => {
 
   expect(clientRes).toStrictEqual(httpRes.data);
 });
+
+test('get release dates for movie', async () => {
+  const clientRes = await client.movies.getReleaseDates('299564');
+  const httpRes = await client.$http.get('/movie/299564/release_dates');
+
+  expect(clientRes).toStrictEqual(httpRes.data);
+});

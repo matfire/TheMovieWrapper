@@ -9,6 +9,7 @@ import {
   ExternalIdsResult,
   ListResult,
   MoviePageInput,
+  ReleaseDateResults,
 } from '../types/movie';
 
 class MovieService {
@@ -115,6 +116,11 @@ class MovieService {
   async getRecommendations(recommendationsData: MoviePageInput): Promise<MovieListResult> {
     const { data } = await this.$http.get(`/movie/${recommendationsData.movieId}/recommendations`, { params: { ...this.$http.defaults.params, language: this.language, page: recommendationsData.page } });
     return data as MovieListResult;
+  }
+
+  async getReleaseDates(movieId: string): Promise<ReleaseDateResults> {
+    const { data } = await this.$http.get(`/movie/${movieId}/release_dates`);
+    return data as ReleaseDateResults;
   }
 
   setSessionId(sId: string) {

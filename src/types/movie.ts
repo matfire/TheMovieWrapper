@@ -1,5 +1,5 @@
 import Movie from '../models/movie/Movie';
-import { List } from './generic';
+import { Language, List } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
 
@@ -84,8 +84,22 @@ interface ListResult {
   results: List[]
 }
 
+interface ReleaseDateResults {
+  id: number;
+  results: {
+    iso_3166_1: string;
+    release_dates: {
+      certification: string;
+      iso_639_1: Language;
+      release_date: Date;
+      type: number;
+      note: string;
+    }[]
+  }[]
+}
+
 export {
   MovieStatus, SearchMovieInput, MovieListResult, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
-  ExternalIdsResult, ListResult, MoviePageInput,
+  ExternalIdsResult, ListResult, MoviePageInput, ReleaseDateResults,
 };
