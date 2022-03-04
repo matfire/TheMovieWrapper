@@ -9,4 +9,17 @@ interface KeywordResult {
   }[]
 }
 
-export { TrendingTimeSpan, Language, KeywordResult };
+interface List {
+  description ?: string;
+  favorite_count : number;
+  id: number;
+  item_count : number;
+  iso_639_1 : Language;
+  list_type : string;
+  name ?: string
+  poster_path ?: string;
+}
+
+export {
+  TrendingTimeSpan, Language, KeywordResult, List,
+};

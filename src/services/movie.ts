@@ -8,6 +8,8 @@ import {
   AlternativeTitlesResult, AlternativeTitlesInput,
   ChangesInput, ChangesResult,
   ExternalIdsResult,
+  ListResult,
+  ListInput,
 } from '../types/movie';
 
 class MovieService {
@@ -40,6 +42,8 @@ class MovieService {
       results: data.results.map((e:any) => Movie.fromJson(e)),
     };
   }
+
+  // TODO: add append_to_response parameter
 
   async getMovie(id: number): Promise<Movie> {
     const { data } = await this.$http.get(`/movie/${id}`, { params: { ...this.$http.defaults.params, language: this.language } });
@@ -102,6 +106,11 @@ class MovieService {
   async getKeyword(movieId: string): Promise<KeywordResult> {
     const { data } = await this.$http.get(`/movie/${movieId}/keywords`);
     return data as KeywordResult;
+  }
+
+  async getLists(listData: ListInput): Promise<ListResult> {
+    const { data } = await this.$http.get(`/movie/${listData.movieId}/lists`, { params: { ...this.$http.defaults.params, language: this.language, page: listData.page || 1 } });
+    return data as ListResult;
   }
 
   setSessionId(sId: string) {

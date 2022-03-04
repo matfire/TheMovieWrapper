@@ -1,6 +1,7 @@
 import Movie from '../models/movie/Movie';
+import { List } from './generic';
 
-type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled';
+type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
 
 interface SearchMovieInput {
   query: string;
@@ -79,8 +80,21 @@ interface ExternalIdsResult {
   id ?: number;
 }
 
+interface ListInput {
+  movieId: string;
+  page?: number;
+}
+
+interface ListResult {
+  id: number;
+  page: number;
+  total_pages: number;
+  total_results: number;
+  results: List[]
+}
+
 export {
   MovieStatus, TrendingMovieResult, SearchMovieInput, SearchMovieResult, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
-  ExternalIdsResult,
+  ExternalIdsResult, ListResult, ListInput,
 };

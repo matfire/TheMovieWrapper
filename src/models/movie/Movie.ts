@@ -98,7 +98,7 @@ class Movie implements IMovieBasicData, IMovieExtraData {
     this.release_date = data.release_date ? new Date(data.release_date) : undefined;
     this.revenue = data.revenue;
     this.runtime = data.runtime;
-    this.status = data.status ?? 'Rumored';
+    this.status = data.status ?? 'Unknown';
     this.tagline = data.tagline;
     this.video = data.video;
     this.vote_average = data.vote_average;
