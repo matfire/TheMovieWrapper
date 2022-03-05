@@ -10,6 +10,7 @@ import {
   ListResult,
   MoviePageInput,
   ReleaseDateResults,
+  TranslationResults,
 } from '../types/movie';
 
 class MovieService {
@@ -138,6 +139,11 @@ class MovieService {
       total_results: data.total_results,
       results: data.results.map((e: any) => Movie.fromJson(e)),
     };
+  }
+
+  async getTranslations(movieId: string): Promise<TranslationResults> {
+    const { data } = await this.$http.get(`/movie/${movieId}/translations`);
+    return data as TranslationResults;
   }
 
   setSessionId(sId: string) {

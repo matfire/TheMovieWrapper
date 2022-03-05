@@ -61,7 +61,7 @@ interface ChangesResult {
       id: string;
       action: string;
       time: Date;
-      iso_639_1: string; // TODO create proper type for iso_639_1
+      iso_639_1: Language;
       value: string;
       original_value: string;
     }[]
@@ -98,8 +98,24 @@ interface ReleaseDateResults {
   }[]
 }
 
+interface TranslationResults {
+  id: number;
+  translations: {
+    iso_3166_1: string;
+    iso_639_1: Language;
+    name: string;
+    english_name: string;
+    data: {
+      title: string;
+      overview: string;
+      homepage: string;
+    }
+  }[]
+}
+
 export {
   MovieStatus, SearchMovieInput, MovieListResult, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
   ExternalIdsResult, ListResult, MoviePageInput, ReleaseDateResults,
+  TranslationResults,
 };

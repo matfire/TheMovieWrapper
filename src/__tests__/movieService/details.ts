@@ -70,3 +70,10 @@ test('get similar movies for movie', async () => {
 
   expect(clientRes).toStrictEqual(httpRes.data);
 });
+
+test('get translations for movie', async () => {
+  const clientRes = await client.movies.getTranslations('299564');
+  const httpRes = await client.$http.get('/movie/299564/translations');
+
+  expect(clientRes).toStrictEqual(httpRes.data);
+});
