@@ -418,10 +418,15 @@ interface TopRatedInput {
   region?: string // TODO create proper type for iso_3166_1
 }
 
+interface UpcomingInput {
+  page ?: number;
+  region?: string // TODO create proper type for iso_3166_1
+}
+
 export {
   MovieStatus, SearchMovieInput, MovieListResult, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
   ExternalIdsResult, ListResult, MoviePageInput, ReleaseDateResults,
   TranslationResults, VideoResults, WatchProvidersResult,
-  PopularInput, TopRatedInput,
+  PopularInput, TopRatedInput, UpcomingInput,
 };

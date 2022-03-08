@@ -16,6 +16,7 @@ import {
   WatchProvidersResult,
   PopularInput,
   TopRatedInput,
+  UpcomingInput,
 } from '../types/movie';
 
 class MovieService {
@@ -100,6 +101,24 @@ class MovieService {
         region: topRatedData?.region,
         language: this.language,
         page: topRatedData?.page,
+      },
+    });
+
+    return {
+      page: data.page,
+      total_pages: data.total_pages,
+      total_results: data.total_results,
+      results: data.results.map((e: any) => Movie.fromJson(e)),
+    };
+  }
+
+  async getUpcoming(upcomingData?: UpcomingInput): Promise<MovieListResult> {
+    const { data } = await this.$http.get('/movie/upcoming', {
+      params: {
+        ...this.$http.defaults.params,
+        region: upcomingData?.region,
+        language: this.language,
+        page: upcomingData?.page,
       },
     });
 
