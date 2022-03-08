@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
+import Video from '../models/Video';
 import { KeywordResult, Language, TrendingTimeSpan } from '../types/generic';
 import {
   SearchMovieInput, MovieListResult,
@@ -11,6 +12,7 @@ import {
   MoviePageInput,
   ReleaseDateResults,
   TranslationResults,
+  VideoResults,
 } from '../types/movie';
 
 class MovieService {
@@ -144,6 +146,14 @@ class MovieService {
   async getTranslations(movieId: string): Promise<TranslationResults> {
     const { data } = await this.$http.get(`/movie/${movieId}/translations`);
     return data as TranslationResults;
+  }
+
+  async getVideos(movieId: string): Promise<VideoResults> {
+    const { data } = await this.$http.get(`/movie/${movieId}/videos`, { params: { ...this.$http.defaults.params, language: this.language } });
+    return {
+      id: data.id,
+      results: data.results.map((e:any) => Video.fromJson(e)),
+    };
   }
 
   setSessionId(sId: string) {

@@ -1,4 +1,5 @@
 import Movie from '../models/movie/Movie';
+import Video from '../models/Video';
 import { Language, List } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
@@ -113,9 +114,14 @@ interface TranslationResults {
   }[]
 }
 
+interface VideoResults {
+  id: number;
+  results: Video[];
+}
+
 export {
   MovieStatus, SearchMovieInput, MovieListResult, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
   ExternalIdsResult, ListResult, MoviePageInput, ReleaseDateResults,
-  TranslationResults,
+  TranslationResults, VideoResults,
 };

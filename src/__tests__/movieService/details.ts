@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import API from '../../index';
+import Video from '../../models/Video';
 
 let client: API;
 
@@ -65,7 +66,7 @@ test('get release dates for movie', async () => {
 });
 
 test('get similar movies for movie', async () => {
-  const clientRes = await client.movies.getSimilar({movieId: '299564'});
+  const clientRes = await client.movies.getSimilar({ movieId: '299564' });
   const httpRes = await client.$http.get('/movie/299564/similar');
 
   expect(clientRes).toStrictEqual(httpRes.data);
@@ -76,4 +77,9 @@ test('get translations for movie', async () => {
   const httpRes = await client.$http.get('/movie/299564/translations');
 
   expect(clientRes).toStrictEqual(httpRes.data);
+});
+
+test('get videos for movie', async () => {
+  const res = await client.movies.getVideos('299534');
+  expect(res.results.pop()).toBeInstanceOf(Video);
 });
