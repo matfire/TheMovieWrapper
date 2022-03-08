@@ -13,6 +13,7 @@ import {
   ReleaseDateResults,
   TranslationResults,
   VideoResults,
+  WatchProvidersResult,
 } from '../types/movie';
 
 class MovieService {
@@ -154,6 +155,11 @@ class MovieService {
       id: data.id,
       results: data.results.map((e:any) => Video.fromJson(e)),
     };
+  }
+
+  async getWatchProviders(movieId: string): Promise<WatchProvidersResult> {
+    const { data } = await this.$http.get(`/movie/${movieId}/watch/providers`);
+    return data as WatchProvidersResult;
   }
 
   setSessionId(sId: string) {

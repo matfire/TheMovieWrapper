@@ -83,3 +83,10 @@ test('get videos for movie', async () => {
   const res = await client.movies.getVideos('299534');
   expect(res.results.pop()).toBeInstanceOf(Video);
 });
+
+test('get watch providers for movie', async () => {
+  const clientRes = await client.movies.getWatchProviders('299564');
+  const httpRes = await client.$http.get('/movie/299564/watch/providers');
+
+  expect(clientRes).toStrictEqual(httpRes.data);
+});
