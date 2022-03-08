@@ -15,7 +15,7 @@ import {
   VideoResults,
   WatchProvidersResult,
   PopularInput,
-  PopularResult,
+  TopRatedInput,
 } from '../types/movie';
 
 class MovieService {
@@ -76,7 +76,7 @@ class MovieService {
     };
   }
 
-  async getPopular(popularData?: PopularInput): Promise<PopularResult> {
+  async getPopular(popularData?: PopularInput): Promise<MovieListResult> {
     const { data } = await this.$http.get('/movie/popular', {
       params: {
         ...this.$http.defaults.params,
@@ -85,6 +85,24 @@ class MovieService {
         page: popularData?.page,
       },
     });
+    return {
+      page: data.page,
+      total_pages: data.total_pages,
+      total_results: data.total_results,
+      results: data.results.map((e: any) => Movie.fromJson(e)),
+    };
+  }
+
+  async getTopRated(topRatedData?: TopRatedInput): Promise<MovieListResult> {
+    const { data } = await this.$http.get('/movie/top_rated', {
+      params: {
+        ...this.$http.defaults.params,
+        region: topRatedData?.region,
+        language: this.language,
+        page: topRatedData?.page,
+      },
+    });
+
     return {
       page: data.page,
       total_pages: data.total_pages,
