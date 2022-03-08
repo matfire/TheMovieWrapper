@@ -1,6 +1,6 @@
 import Movie from '../models/movie/Movie';
 import Video from '../models/Video';
-import { Language, List } from './generic';
+import { Country, Language, List } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
 
@@ -33,13 +33,13 @@ interface NowPlayingMovieResult {
 
 interface AlternativeTitlesInput {
   movieId: string;
-  country ?: string; // TODO create proper type for iso_3166_1
+  country ?: Country;
 }
 
 interface AlternativeTitlesResult {
   id: number;
   titles: {
-    iso_3166_1: string, // TODO create proper type for iso_3166_1
+    iso_3166_1: Country,
     title: string,
     type: string
   }[]
@@ -88,7 +88,7 @@ interface ListResult {
 interface ReleaseDateResults {
   id: number;
   results: {
-    iso_3166_1: string; // TODO create proper type for iso_3166_1
+    iso_3166_1: Country;
     release_dates: {
       certification: string;
       iso_639_1: Language;
@@ -102,7 +102,7 @@ interface ReleaseDateResults {
 interface TranslationResults {
   id: number;
   translations: {
-    iso_3166_1: string; // TODO create proper type for iso_3166_1
+    iso_3166_1: Country;
     iso_639_1: Language;
     name: string;
     english_name: string;
@@ -410,17 +410,17 @@ interface WatchProvidersResult {
 
 interface PopularInput {
   page?: number;
-  region?: string; // TODO create proper type for iso_3166_1
+  region?: Country;
 }
 
 interface TopRatedInput {
   page ?: number;
-  region?: string // TODO create proper type for iso_3166_1
+  region?: Country;
 }
 
 interface UpcomingInput {
   page ?: number;
-  region?: string // TODO create proper type for iso_3166_1
+  region?: Country;
 }
 
 export {

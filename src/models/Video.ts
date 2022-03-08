@@ -1,8 +1,8 @@
-import { Language } from '../types/generic';
+import { Country, Language } from '../types/generic';
 
 interface VideoInput {
   iso_639_1: Language;
-iso_3166_1: string; // TODO: type for country
+iso_3166_1: Country;
 name: string
 key: string
 site: string
@@ -16,7 +16,7 @@ id : string
 class Video implements VideoInput {
   iso_639_1: Language;
 
-  iso_3166_1: string;
+  iso_3166_1: Country;
 
   name: string;
 

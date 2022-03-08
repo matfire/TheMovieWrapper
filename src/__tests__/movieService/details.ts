@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import API from '../../index';
 import Video from '../../models/Video';
+import { Country } from '../../types/generic';
 
 let client: API;
 
@@ -16,8 +17,8 @@ test('get specific movie', async () => {
 });
 
 test('get alternative titles for movie', async () => {
-  const clientRes = await client.movies.getAlternativeTitles({ movieId: '299564' });
-  const httpRes = await client.$http.get('/movie/299564/alternative_titles');
+  const clientRes = await client.movies.getAlternativeTitles({ movieId: '299564', country: Country.Italy });
+  const httpRes = await client.$http.get('/movie/299564/alternative_titles', { params: { ...client.$http.defaults.params, country: Country.Italy } });
 
   expect(clientRes.id).toBe(httpRes.data.id);
   expect(clientRes.titles.length).toBe(httpRes.data.titles.length);
