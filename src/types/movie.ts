@@ -17,7 +17,7 @@ interface MovieListResult {
   page: number;
   total_pages: number;
   total_results: number;
-  results: Movie[]
+  results: List[]
 }
 
 interface NowPlayingMovieResult {
@@ -88,7 +88,7 @@ interface ListResult {
 interface ReleaseDateResults {
   id: number;
   results: {
-    iso_3166_1: string;
+    iso_3166_1: string; // TODO create proper type for iso_3166_1
     release_dates: {
       certification: string;
       iso_639_1: Language;
@@ -102,7 +102,7 @@ interface ReleaseDateResults {
 interface TranslationResults {
   id: number;
   translations: {
-    iso_3166_1: string;
+    iso_3166_1: string; // TODO create proper type for iso_3166_1
     iso_639_1: Language;
     name: string;
     english_name: string;
@@ -408,9 +408,22 @@ interface WatchProvidersResult {
   }
 }
 
+interface PopularInput {
+  page?: number;
+  region?: string; // TODO create proper type for iso_3166_1
+}
+
+interface PopularResult {
+  page: number;
+  total_results: number;
+  total_pages: number;
+  results: Movie[]
+}
+
 export {
   MovieStatus, SearchMovieInput, MovieListResult, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
   ExternalIdsResult, ListResult, MoviePageInput, ReleaseDateResults,
   TranslationResults, VideoResults, WatchProvidersResult,
+  PopularInput, PopularResult,
 };

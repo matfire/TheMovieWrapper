@@ -14,6 +14,8 @@ import {
   TranslationResults,
   VideoResults,
   WatchProvidersResult,
+  PopularInput,
+  PopularResult,
 } from '../types/movie';
 
 class MovieService {
@@ -70,6 +72,23 @@ class MovieService {
         maximum: new Date(data.dates.maximum),
         minimum: new Date(data.dates.minimum),
       },
+      results: data.results.map((e: any) => Movie.fromJson(e)),
+    };
+  }
+
+  async getPopular(popularData?: PopularInput): Promise<PopularResult> {
+    const { data } = await this.$http.get('/movie/popular', {
+      params: {
+        ...this.$http.defaults.params,
+        region: popularData?.region,
+        language: this.language,
+        page: popularData?.page,
+      },
+    });
+    return {
+      page: data.page,
+      total_pages: data.total_pages,
+      total_results: data.total_results,
       results: data.results.map((e: any) => Movie.fromJson(e)),
     };
   }
@@ -161,6 +180,10 @@ class MovieService {
     const { data } = await this.$http.get(`/movie/${movieId}/watch/providers`);
     return data as WatchProvidersResult;
   }
+
+  // TODO: rate movie here
+
+  // TODO: delete rating here
 
   setSessionId(sId: string) {
     this.session_id = sId;
