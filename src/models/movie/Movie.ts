@@ -1,5 +1,6 @@
-import MovieStatus from '../types/movie';
-import Genre from './Genre';
+import { Language } from '../../types/generic';
+import { MovieStatus } from '../../types/movie';
+import Genre from '../Genre';
 
 interface IMovieBasicData {
     id: string;
@@ -16,7 +17,7 @@ interface IMovieExtraData {
     genres?: Genre[];
     homepage?: string;
     imdb_id?: string;
-    original_language?: string;
+    original_language?: Language;
     overview?: string;
     popularity?: number;
     release_date?: Date;
@@ -52,7 +53,7 @@ class Movie implements IMovieBasicData, IMovieExtraData {
 
   imdb_id?: string;
 
-  original_language?: string;
+  original_language?: Language;
 
   overview?: string;
 
@@ -97,22 +98,17 @@ class Movie implements IMovieBasicData, IMovieExtraData {
     this.release_date = data.release_date ? new Date(data.release_date) : undefined;
     this.revenue = data.revenue;
     this.runtime = data.runtime;
-    this.status = data.status ?? 'Rumored';
+    this.status = data.status ?? 'Unknown';
     this.tagline = data.tagline;
     this.video = data.video;
     this.vote_average = data.vote_average;
     this.vote_count = data.vote_count;
   }
 
-  static fromJson(data: any, extra = false): Movie {
-    const initialData = {
-      id: data.id,
-      poster_path: data.poster_path,
-      title: data.title,
-      original_title: data.original_title,
-    };
+  static fromJson(data: any): Movie {
+    const initialData: IMovieBasicData = { ...data };
 
-    const extraData: IMovieExtraData = extra ? { ...data } : undefined;
+    const extraData: IMovieExtraData = { ...data };
     return new Movie(initialData, extraData);
   }
 }

@@ -1,6 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
 import { $log, Logger } from '@tsed/logger';
-import AuthenticationService from '../services/authentication';
+import AuthenticationService from './services/authentication';
+import MovieService from './services/movie';
+import { Language } from './types/generic';
 
 class API {
   apiKey: string;
@@ -11,12 +13,18 @@ class API {
 
   auth: AuthenticationService;
 
+  movies: MovieService;
+
+  language: Language;
+
   constructor(apiKey:string, testing = false) {
     this.apiKey = apiKey;
-    this.$http = axios.create({ baseURL: 'https://api.themoviedb.org/3', params: { api_key: apiKey } });
+    this.language = 'en';
+    this.$http = axios.create({ baseURL: 'https://api.themoviedb.org/3', params: { test: 'toto', api_key: apiKey } });
     this.logger = $log;
     this.logger.name = 'TheMovieGetter';
     this.logger.level = 'debug';
+
     if (testing) {
       this.$http.interceptors.response.use((value) => {
         this.logger.info(`${value.config.url}`);
@@ -27,7 +35,14 @@ class API {
         Promise.reject(error);
       });
     }
+
     this.auth = new AuthenticationService(this.$http);
+    this.movies = new MovieService(this.$http);
+  }
+
+  setLanguage(l: Language) {
+    this.language = l;
+    this.movies.setLanguage(l);
   }
 }
 
