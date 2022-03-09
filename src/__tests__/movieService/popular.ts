@@ -7,7 +7,7 @@ let clientRes: MovieListResult;
 let res: { data: { results: string | any[]; total_pages: any; total_results: any; }; };
 
 beforeAll(async () => {
-  client = new API(process.env.TMDB_KEY!, true);
+  client = new API(process.env.TMDB_KEY!);
   clientRes = await client.movies.getPopular();
   res = await client.$http.get('/movie/popular');
 });

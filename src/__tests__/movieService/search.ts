@@ -8,7 +8,7 @@ let clientRes: MovieListResult;
 let res: AxiosResponse<any, any>;
 
 beforeAll(async () => {
-  client = new API(process.env.TMDB_KEY!, true);
+  client = new API(process.env.TMDB_KEY!);
   clientRes = await client.movies.search({ query: 'avengers', primary_release_year: 2019 });
   res = await client.$http.get('/search/movie', { params: { ...client.$http.defaults.params, query: 'avengers', primary_release_year: 2019 } });
 });

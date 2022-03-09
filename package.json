@@ -1,6 +1,6 @@
 {
   "name": "@matfire/the_movie_wrapper",
-  "version": "0.1.0",
+  "version": "0.1.8",
   "description": "",
   "scripts": {
     "build": "npx tsc -p tsconfig.build.json",
@@ -34,8 +34,6 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "@tsed/logger": "^6.1.0",
-    "axios": "^0.25.0",
-    "source-map-support": "^0.5.21"
+    "axios": "^0.25.0"
   }
 }

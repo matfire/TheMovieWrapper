@@ -4,7 +4,7 @@ import API from '../../index';
 let client: API;
 
 beforeAll(() => {
-  client = new API(process.env.TMDB_KEY!, true);
+  client = new API(process.env.TMDB_KEY!);
 });
 
 test('get latest movie', async () => {

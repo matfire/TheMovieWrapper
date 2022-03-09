@@ -8,7 +8,7 @@ let clientRes: MovieListResult;
 let res: AxiosResponse<any, any>;
 
 beforeAll(async () => {
-  client = new API(process.env.TMDB_KEY!, true);
+  client = new API(process.env.TMDB_KEY!);
   clientRes = await client.movies.getTopRated();
   res = await client.$http.get('/movie/top_rated');
 });

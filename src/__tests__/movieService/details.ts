@@ -6,7 +6,7 @@ import { Country } from '../../types/generic';
 let client: API;
 
 beforeAll(() => {
-  client = new API(process.env.TMDB_KEY!, true);
+  client = new API(process.env.TMDB_KEY!);
 });
 
 test('get specific movie', async () => {

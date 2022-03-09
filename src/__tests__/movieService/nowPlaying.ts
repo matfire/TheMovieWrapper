@@ -8,7 +8,7 @@ let clientRes: NowPlayingMovieResult;
 let res: AxiosResponse<any, any>;
 
 beforeAll(async () => {
-  client = new API(process.env.TMDB_KEY!, true);
+  client = new API(process.env.TMDB_KEY!);
   clientRes = await client.movies.getNowPlaying();
   res = await client.$http.get('/movie/now_playing');
 });
