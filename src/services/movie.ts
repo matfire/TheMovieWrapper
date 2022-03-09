@@ -1,7 +1,9 @@
 import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
 import Video from '../models/Video';
-import { KeywordResult, Language, TrendingTimeSpan } from '../types/generic';
+import {
+  KeywordResult, Language, Response, TrendingTimeSpan,
+} from '../types/generic';
 import {
   SearchMovieInput, MovieListResult,
   NowPlayingMovieResult,
@@ -156,14 +158,14 @@ class MovieService {
 
   // TODO Credits Go Here
 
-  async getExternalIds(movieId: string): Promise<ExternalIdsResult> {
+  async getExternalIds(movieId: number): Promise<ExternalIdsResult> {
     const { data } = await this.$http.get(`/movie/${movieId}/external_ids`);
     return data as ExternalIdsResult;
   }
 
   // TODO Images Go Here
 
-  async getKeyword(movieId: string): Promise<KeywordResult> {
+  async getKeyword(movieId: number): Promise<KeywordResult> {
     const { data } = await this.$http.get(`/movie/${movieId}/keywords`);
     return data as KeywordResult;
   }
@@ -183,7 +185,7 @@ class MovieService {
     };
   }
 
-  async getReleaseDates(movieId: string): Promise<ReleaseDateResults> {
+  async getReleaseDates(movieId: number): Promise<ReleaseDateResults> {
     const { data } = await this.$http.get(`/movie/${movieId}/release_dates`);
     return data as ReleaseDateResults;
   }
@@ -200,12 +202,12 @@ class MovieService {
     };
   }
 
-  async getTranslations(movieId: string): Promise<TranslationResults> {
+  async getTranslations(movieId: number): Promise<TranslationResults> {
     const { data } = await this.$http.get(`/movie/${movieId}/translations`);
     return data as TranslationResults;
   }
 
-  async getVideos(movieId: string): Promise<VideoResults> {
+  async getVideos(movieId: number): Promise<VideoResults> {
     const { data } = await this.$http.get(`/movie/${movieId}/videos`, { params: { ...this.$http.defaults.params, language: this.language } });
     return {
       id: data.id,
@@ -213,14 +215,25 @@ class MovieService {
     };
   }
 
-  async getWatchProviders(movieId: string): Promise<WatchProvidersResult> {
+  async getWatchProviders(movieId: number): Promise<WatchProvidersResult> {
     const { data } = await this.$http.get(`/movie/${movieId}/watch/providers`);
     return data as WatchProvidersResult;
   }
 
-  // TODO: rate movie here
+  async rate(movieId: number, value:number): Promise<Response> {
+    const { data } = await this.$http.post(`/movie/${movieId}/rating`, { value }, {
+      params: { ...this.$http.defaults.params, session_id: this.session_id },
+    });
+    return data as Response;
+  }
 
-  // TODO: delete rating here
+  async deleteRating(movieId: number): Promise<Response> {
+    const { data } = await this.$http.delete(`/movie/${movieId}/rating`, {
+      params: { ...this.$http.defaults.params, session_id: this.session_id },
+    });
+
+    return data as Response;
+  }
 
   setSessionId(sId: string) {
     this.session_id = sId;

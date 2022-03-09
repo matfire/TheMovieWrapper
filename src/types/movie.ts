@@ -32,7 +32,7 @@ interface NowPlayingMovieResult {
 }
 
 interface AlternativeTitlesInput {
-  movieId: string;
+  movieId: number;
   country ?: Country;
 }
 
@@ -46,7 +46,7 @@ interface AlternativeTitlesResult {
 }
 
 interface MoviePageInput {
-  movieId: string;
+  movieId: number;
   page?: number;
 }
 
