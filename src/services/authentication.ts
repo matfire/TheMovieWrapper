@@ -1,4 +1,5 @@
 import { AxiosInstance } from 'axios';
+import { NewTokenResult, SessionResult } from '../types/authentication';
 
 class AuthenticationService {
   $http: AxiosInstance;
@@ -7,26 +8,29 @@ class AuthenticationService {
     this.$http = httpClient;
   }
 
-  async getAuthenticationToken(): Promise<string> {
+  async getAuthenticationToken(): Promise<NewTokenResult> {
     const res = await this.$http.get('/authentication/token/new');
-    if (!res.data.success) {
-      throw new Error('Could not get request token');
-    }
-    return res.data.request_token;
+    return res.data as NewTokenResult;
   }
 
-  async createAuthUrl(redirectUrl: string): Promise<string> {
-    const token = await this.getAuthenticationToken();
-
+  async createAuthUrl(redirectUrl: string, requestToken ?: string): Promise<string> {
+    let token = requestToken;
+    if (!token) {
+      const tmp = await this.getAuthenticationToken();
+      token = tmp.request_token;
+    }
+    localStorage.setItem('tmdb_request_token', token);
     return `https://www.themoviedb.org/authenticate/${token}?redirect_to=${redirectUrl}`;
   }
 
-  async createSession(requestToken:string): Promise<string> {
-    const res = await this.$http.post('/authentication/session/new', { request_token: requestToken });
-    if (!res.data.success) {
-      throw new Error('Could not get session id');
+  async createSession(requestToken?: string): Promise<SessionResult> {
+    let token = requestToken;
+
+    if (!token) {
+      token = localStorage.getItem('tmdb_request_token')!;
     }
-    return res.data.session_id;
+    const res = await this.$http.post('/authentication/session/new', { request_token: token });
+    return res.data as SessionResult;
   }
 }
 

@@ -16,10 +16,12 @@ class API {
 
   private imageUrl = 'https://image.tmdb.org/t/p/';
 
+  private sessionId: string | undefined;
+
   constructor(apiKey:string) {
     this.apiKey = apiKey;
     this.language = 'en';
-    this.$http = axios.create({ baseURL: 'https://api.themoviedb.org/3', params: { test: 'toto', api_key: apiKey } });
+    this.$http = axios.create({ baseURL: 'https://api.themoviedb.org/3', params: { api_key: apiKey } });
     this.auth = new AuthenticationService(this.$http);
     this.movies = new MovieService(this.$http);
   }
@@ -31,6 +33,11 @@ class API {
 
   getImageUrl(path: string, size:string): string {
     return `${this.imageUrl}/${size}/${path}`;
+  }
+
+  setSessionId(session: string) {
+    this.sessionId = session;
+    this.movies.setSessionId(session);
   }
 }
 

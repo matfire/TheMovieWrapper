@@ -1,3 +1,14 @@
 .husky/
 test/
 src/
+docs/
+coverage/
+.github/
+.husky/
+.env
+.eslitrc.js
+.gitignore
+jest.config.js
+README.md
+tsconfig.build.json
+tsconfig.js
