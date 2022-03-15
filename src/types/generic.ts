@@ -279,6 +279,14 @@ interface Response {
   status_message: string;
 }
 
+interface GenericListResult<T> {
+  total_pages:number;
+  total_results: number;
+  page: number;
+  results: T[]
+}
+
 export {
   TrendingTimeSpan, Language, KeywordResult, List, Country, Response,
+  GenericListResult,
 };

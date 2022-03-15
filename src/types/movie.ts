@@ -13,13 +13,6 @@ interface SearchMovieInput {
   primary_release_year ?: number;
 }
 
-interface MovieListResult {
-  page: number;
-  total_pages: number;
-  total_results: number;
-  results: Movie[]
-}
-
 interface NowPlayingMovieResult {
   page: number;
   total_pages: number;
@@ -424,7 +417,7 @@ interface UpcomingInput {
 }
 
 export {
-  MovieStatus, SearchMovieInput, MovieListResult, NowPlayingMovieResult,
+  MovieStatus, SearchMovieInput, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
   ExternalIdsResult, ListResult, MoviePageInput, ReleaseDateResults,
   TranslationResults, VideoResults, WatchProvidersResult,

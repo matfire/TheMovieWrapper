@@ -1,9 +1,10 @@
 /* eslint-disable no-undef */
 import API from '../../index';
-import { MovieListResult } from '../../types/movie';
+import Movie from '../../models/movie/Movie';
+import { GenericListResult } from '../../types/generic';
 
 let client: API;
-let clientRes: MovieListResult;
+let clientRes: GenericListResult<Movie>;
 let res: { data: { results: string | any[]; total_pages: any; total_results: any; }; };
 
 beforeAll(async () => {
