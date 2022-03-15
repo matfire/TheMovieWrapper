@@ -16,11 +16,10 @@ class AccountService {
 
   account_id: string | undefined;
 
-  language: Language;
+  language: Language = "en";
 
-  constructor(httpClient: AxiosInstance, language: Language) {
+  constructor(httpClient: AxiosInstance) {
     this.$http = httpClient;
-    this.language = language;
   }
 
   async getAccount(): Promise<AccountDetailsResults> {
