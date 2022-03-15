@@ -42,6 +42,7 @@ class API {
   setSessionId(session: string) {
     this.sessionId = session;
     this.movies.setSessionId(session);
+    this.account.setSessionId(session);
   }
 }
 

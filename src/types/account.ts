@@ -17,12 +17,6 @@ interface AccountDetailsResults {
   username: string;
 }
 
-interface FavoriteMoviesInput {
-  accountID: number;
-  sort_by?: SortValues;
-  page?: number
-}
-
 interface MarkFavoriteInput {
   accountID: number;
   media_id: number;
@@ -30,15 +24,22 @@ interface MarkFavoriteInput {
   favorite: boolean;
 }
 
-interface WatchlistInput {
+interface SortPageAccountInput {
   sort_by?: SortValues;
   page?: number;
   accountID: number;
 }
 
+interface WatchlistInput {
+  accountID: number;
+  media_type: MediaValue;
+  media_id: number;
+  watchlist: boolean;
+}
+
 export {
   AccountDetailsResults,
-  FavoriteMoviesInput,
   MarkFavoriteInput,
+  SortPageAccountInput,
   WatchlistInput,
 };

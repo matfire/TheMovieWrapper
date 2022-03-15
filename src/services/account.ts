@@ -2,7 +2,7 @@ import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
 import {
   AccountDetailsResults,
-  FavoriteMoviesInput, MarkFavoriteInput, WatchlistInput,
+  MarkFavoriteInput, SortPageAccountInput, WatchlistInput,
 } from '../types/account';
 import { GenericListResult, List, Response } from '../types/generic';
 
@@ -32,9 +32,9 @@ class AccountService {
     return data as GenericListResult<List>;
   }
 
-  async getFavoriteMovies(favoriteInput: FavoriteMoviesInput): Promise<GenericListResult<Movie>> {
+  async getFavoriteMovies(favoriteInput: SortPageAccountInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get(`/account/${favoriteInput.accountID}/favorite/movies`, {
-      params: { 
+      params: {
         ...this.$http.defaults.params,
         session_id: this.session_id,
         sort_by: favoriteInput.sort_by,
@@ -64,18 +64,24 @@ class AccountService {
     return data as Response;
   }
 
-  // TODO get favorite movies
-
   // TODO get favorite tv shows
 
-  // TODO get movie watchlist
 
   // TODO get tv show watchlist
 
-  // TODO add to watchlist
+  async addToWatchlist(watchInput: WatchlistInput): Promise<Response> {
+    const { data } = await this.$http.post(`/account/${watchInput.accountID}/watchlist`, {
+      media_type: watchInput.media_type,
+      media_id: watchInput.media_id,
+      watchlist: watchInput.watchlist,
+    }, {
+      params: { ...this.$http.defaults.params, session_id: this.session_id },
+    });
+    return data as Response;
+  }
 
-  async getMovieWatchlist(watchInput: WatchlistInput): Promise<GenericListResult<Movie>> {
-    const { data } = await this.$http.get(`/account/${watchInput.accountID}/favorite/movies`, {
+  async getMovieWatchlist(watchInput: SortPageAccountInput): Promise<GenericListResult<Movie>> {
+    const { data } = await this.$http.get(`/account/${watchInput.accountID}/watchlist/movies`, {
       params: {
         ...this.$http.defaults.params,
         session_id: this.session_id,
