@@ -5,7 +5,9 @@ import {
   CreatedListsInput,
   MarkFavoriteInput, SortPageAccountInput, WatchlistInput,
 } from '../types/account';
-import { GenericListResult, Language, List, Response } from '../types/generic';
+import {
+  GenericListResult, Language, List, Response,
+} from '../types/generic';
 
 class AccountService {
   $http: AxiosInstance;
@@ -13,8 +15,8 @@ class AccountService {
   session_id: string | undefined;
 
   account_id: string | undefined;
-  
-  language: Language; 
+
+  language: Language;
 
   constructor(httpClient: AxiosInstance, language: Language) {
     this.$http = httpClient;
@@ -30,11 +32,11 @@ class AccountService {
 
   async getCreatedLists(createdInput: CreatedListsInput): Promise<GenericListResult<List>> {
     const { data } = await this.$http.get(`/account/${createdInput.accountID}/lists`, {
-      params: { 
+      params: {
         ...this.$http.defaults.params,
         session_id: this.session_id,
         page: createdInput.page,
-        language: this.language
+        language: this.language,
       },
     });
 
@@ -48,7 +50,7 @@ class AccountService {
         session_id: this.session_id,
         sort_by: favoriteInput.sort_by,
         page: favoriteInput.page,
-        language: this.language
+        language: this.language,
       },
     });
 
@@ -74,14 +76,14 @@ class AccountService {
     return data as Response;
   }
 
-  async getRatedMovies(ratedInput: SortPageAccountInput): Promise<GenericListResult<Movie> {
+  async getRatedMovies(ratedInput: SortPageAccountInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get(`/account/${ratedInput.accountID}/rated/movies`, {
       params: {
         ...this.$http.defaults.params,
         session_id: this.session_id,
         sort_by: ratedInput.sort_by,
         page: ratedInput.page,
-        language: this.language
+        language: this.language,
       },
     });
 
@@ -89,14 +91,13 @@ class AccountService {
       page: data.page,
       total_pages: data.total_pages,
       total_results: data.total_results,
-      results: data.results.map((e:any) => Movie.fromJson(e).addRating(parseInt(e.rating))),
+      results: data.results.map((e:any) => Movie.fromJson(e).addRating(parseInt(e.rating, 10))),
     };
   }
 
   // TODO get rated tv shows
 
   // TODO get rated tv episodes
-
 
   async addToWatchlist(watchInput: WatchlistInput): Promise<Response> {
     const { data } = await this.$http.post(`/account/${watchInput.accountID}/watchlist`, {
@@ -116,7 +117,7 @@ class AccountService {
         session_id: this.session_id,
         sort_by: watchInput.sort_by,
         page: watchInput.page,
-        language: this.language
+        language: this.language,
       },
     });
 
