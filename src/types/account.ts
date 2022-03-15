@@ -17,6 +17,11 @@ interface AccountDetailsResults {
   username: string;
 }
 
+interface CreatedListsInput {
+  accountID: number;
+  page ?: number;
+}
+
 interface MarkFavoriteInput {
   accountID: number;
   media_id: number;
@@ -39,6 +44,7 @@ interface WatchlistInput {
 
 export {
   AccountDetailsResults,
+  CreatedListsInput,
   MarkFavoriteInput,
   SortPageAccountInput,
   WatchlistInput,

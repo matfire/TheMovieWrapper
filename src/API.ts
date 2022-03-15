@@ -33,6 +33,7 @@ class API {
   setLanguage(l: Language) {
     this.language = l;
     this.movies.setLanguage(l);
+    this.account.setLanguage(l);
   }
 
   getImageUrl(path: string, size:string): string {

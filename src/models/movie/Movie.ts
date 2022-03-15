@@ -75,6 +75,8 @@ class Movie implements IMovieBasicData, IMovieExtraData {
 
   vote_count?: number;
 
+  rating?: number;
+
   constructor(initialData: IMovieBasicData, extraData ?: IMovieExtraData) {
     this.id = initialData.id;
     this.poster_path = initialData.poster_path;
@@ -110,6 +112,11 @@ class Movie implements IMovieBasicData, IMovieExtraData {
 
     const extraData: IMovieExtraData = { ...data };
     return new Movie(initialData, extraData);
+  }
+
+  addRating(r: number): Movie {
+    this.rating = r;
+    return this;
   }
 }
 
