@@ -66,7 +66,6 @@ class AccountService {
 
   // TODO get favorite tv shows
 
-
   // TODO get tv show watchlist
 
   async addToWatchlist(watchInput: WatchlistInput): Promise<Response> {
