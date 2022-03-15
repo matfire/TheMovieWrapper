@@ -2,10 +2,11 @@ import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
 import Video from '../models/Video';
 import {
+  GenericListResult,
   KeywordResult, Language, Response, TrendingTimeSpan,
 } from '../types/generic';
 import {
-  SearchMovieInput, MovieListResult,
+  SearchMovieInput,
   NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput,
   ChangesInput, ChangesResult,
@@ -32,7 +33,7 @@ class MovieService {
     this.$http = client;
   }
 
-  async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<MovieListResult> {
+  async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get(`/trending/movie/${timeSpan}`, { params: { ...this.$http.defaults.params, page, language: this.language } });
     return {
       total_pages: data.total_pages,
@@ -42,7 +43,7 @@ class MovieService {
     };
   }
 
-  async search(input: SearchMovieInput): Promise<MovieListResult> {
+  async search(input: SearchMovieInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get('/search/movie', { params: { ...this.$http.defaults.params, language: this.language, ...input } });
     return {
       page: input.page || 1,
@@ -79,7 +80,7 @@ class MovieService {
     };
   }
 
-  async getPopular(popularData?: PopularInput): Promise<MovieListResult> {
+  async getPopular(popularData?: PopularInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get('/movie/popular', {
       params: {
         ...this.$http.defaults.params,
@@ -96,7 +97,7 @@ class MovieService {
     };
   }
 
-  async getTopRated(topRatedData?: TopRatedInput): Promise<MovieListResult> {
+  async getTopRated(topRatedData?: TopRatedInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get('/movie/top_rated', {
       params: {
         ...this.$http.defaults.params,
@@ -114,7 +115,7 @@ class MovieService {
     };
   }
 
-  async getUpcoming(upcomingData?: UpcomingInput): Promise<MovieListResult> {
+  async getUpcoming(upcomingData?: UpcomingInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get('/movie/upcoming', {
       params: {
         ...this.$http.defaults.params,
@@ -175,7 +176,7 @@ class MovieService {
     return data as ListResult;
   }
 
-  async getRecommendations(recommendationsData: MoviePageInput): Promise<MovieListResult> {
+  async getRecommendations(recommendationsData: MoviePageInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get(`/movie/${recommendationsData.movieId}/recommendations`, { params: { ...this.$http.defaults.params, language: this.language, page: recommendationsData.page } });
     return {
       page: data.page,
@@ -192,7 +193,7 @@ class MovieService {
 
   // TODO Reviews Go Here
 
-  async getSimilar(similarData: MoviePageInput): Promise<MovieListResult> {
+  async getSimilar(similarData: MoviePageInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get(`/movie/${similarData.movieId}/similar`, { params: { ...this.$http.defaults.params, language: this.language, page: similarData.page } });
     return {
       page: data.page,

@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
 import { AxiosResponse } from 'axios';
 import API from '../../index';
-import { MovieListResult } from '../../types/movie';
+import Movie from '../../models/movie/Movie';
+import { GenericListResult } from '../../types/generic';
 
 let client: API;
-let clientRes: MovieListResult;
+let clientRes: GenericListResult<Movie>;
 let res: AxiosResponse<any, any>;
 
 beforeAll(async () => {
