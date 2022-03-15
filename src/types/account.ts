@@ -1,7 +1,6 @@
-import Movie from '../models/movie/Movie';
-import { Country, Language, List } from './generic';
+import { Country, Language } from './generic';
 
-type FavoriteSortValues = 'created_at.asc' | 'created_at.desc';
+type SortValues = 'created_at.asc' | 'created_at.desc';
 type MediaValue = 'tv' | 'movie';
 
 interface AccountDetailsResults {
@@ -18,24 +17,10 @@ interface AccountDetailsResults {
   username: string;
 }
 
-interface CreatedListsResults {
-  page: number;
-  results: List[];
-  total_results: number;
-  total_pages: number;
-}
-
 interface FavoriteMoviesInput {
   accountID: number;
-  sort_by?: FavoriteSortValues;
+  sort_by?: SortValues;
   page?: number
-}
-
-interface FavoriteMoviesResults {
-  page: number;
-  results: Movie[];
-  total_pages: number;
-  total_results: number;
 }
 
 interface MarkFavoriteInput {
@@ -45,9 +30,15 @@ interface MarkFavoriteInput {
   favorite: boolean;
 }
 
+interface WatchlistInput {
+  sort_by?: SortValues;
+  page?: number;
+  accountID: number;
+}
+
 export {
   AccountDetailsResults,
-  CreatedListsResults,
-  FavoriteMoviesInput, FavoriteMoviesResults,
+  FavoriteMoviesInput,
   MarkFavoriteInput,
+  WatchlistInput,
 };

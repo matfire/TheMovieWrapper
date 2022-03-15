@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
 import {
-  AccountDetailsResults, CreatedListsResults,
-  FavoriteMoviesInput, FavoriteMoviesResults, MarkFavoriteInput,
+  AccountDetailsResults,
+  FavoriteMoviesInput, MarkFavoriteInput, WatchlistInput,
 } from '../types/account';
-import { Response } from '../types/generic';
+import { GenericListResult, List, Response } from '../types/generic';
 
 class AccountService {
   $http: AxiosInstance;
@@ -24,17 +24,22 @@ class AccountService {
     return data as AccountDetailsResults;
   }
 
-  async getCreatedLists(accountID: string): Promise<CreatedListsResults> {
+  async getCreatedLists(accountID: string): Promise<GenericListResult<List>> {
     const { data } = await this.$http.get(`/account/${accountID}/lists`, {
       params: { ...this.$http.defaults.params, session_id: this.session_id },
     });
 
-    return data as CreatedListsResults;
+    return data as GenericListResult<List>;
   }
 
-  async getFavoriteMovies(favoriteInput: FavoriteMoviesInput): Promise<FavoriteMoviesResults> {
+  async getFavoriteMovies(favoriteInput: FavoriteMoviesInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get(`/account/${favoriteInput.accountID}/favorite/movies`, {
-      params: { ...this.$http.defaults.params, session_id: this.session_id },
+      params: { 
+        ...this.$http.defaults.params,
+        session_id: this.session_id,
+        sort_by: favoriteInput.sort_by,
+        page: favoriteInput.page,
+      },
     });
 
     return {
@@ -68,6 +73,24 @@ class AccountService {
   // TODO get tv show watchlist
 
   // TODO add to watchlist
+
+  async getMovieWatchlist(watchInput: WatchlistInput): Promise<GenericListResult<Movie>> {
+    const { data } = await this.$http.get(`/account/${watchInput.accountID}/favorite/movies`, {
+      params: {
+        ...this.$http.defaults.params,
+        session_id: this.session_id,
+        sort_by: watchInput.sort_by,
+        page: watchInput.page,
+      },
+    });
+
+    return {
+      page: data.page,
+      total_pages: data.total_pages,
+      total_results: data.total_results,
+      results: data.results.map((e:any) => Movie.fromJson(e)),
+    };
+  }
 
   setSessionId(sessionId: string) {
     this.session_id = sessionId;

@@ -288,5 +288,5 @@ interface GenericListResult<T> {
 
 export {
   TrendingTimeSpan, Language, KeywordResult, List, Country, Response,
-  GenericListResult
+  GenericListResult,
 };
