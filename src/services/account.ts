@@ -16,7 +16,7 @@ class AccountService {
 
   account_id: string | undefined;
 
-  language: Language = "en";
+  language: Language = 'en';
 
   constructor(httpClient: AxiosInstance) {
     this.$http = httpClient;
