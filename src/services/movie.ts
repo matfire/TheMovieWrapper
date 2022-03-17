@@ -20,6 +20,8 @@ import {
   PopularInput,
   TopRatedInput,
   UpcomingInput,
+  AppendToResponseMovie,
+  ImagesResult,
 } from '../types/movie';
 
 class MovieService {
@@ -53,10 +55,14 @@ class MovieService {
     };
   }
 
-  // TODO: add append_to_response parameter
-
-  async getMovie(id: number): Promise<Movie> {
-    const { data } = await this.$http.get(`/movie/${id}`, { params: { ...this.$http.defaults.params, language: this.language } });
+  async getMovie(id: number, appendToResponse ?: AppendToResponseMovie[]): Promise<Movie> {
+    const { data } = await this.$http.get(`/movie/${id}`, {
+      params: {
+        ...this.$http.defaults.params,
+        language: this.language,
+        append_to_response: appendToResponse?.join(','),
+      },
+    });
     return Movie.fromJson(data);
   }
 
@@ -165,6 +171,16 @@ class MovieService {
   }
 
   // TODO Images Go Here
+  async getImages(movieId: number, includeImageLanguage ?: Language[]): Promise<ImagesResult> {
+    const { data } = await this.$http.get(`/movie/${movieId}/images`, {
+      params: {
+        ...this.$http.defaults.params,
+        language: this.language,
+        include_image_language: includeImageLanguage?.join(','),
+      },
+    });
+    return data as ImagesResult;
+  }
 
   async getKeyword(movieId: number): Promise<KeywordResult> {
     const { data } = await this.$http.get(`/movie/${movieId}/keywords`);

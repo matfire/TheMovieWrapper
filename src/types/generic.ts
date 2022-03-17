@@ -286,7 +286,17 @@ interface GenericListResult<T> {
   results: T[]
 }
 
+interface Image {
+  aspect_ration: number;
+  file_path: string;
+  height: number;
+  iso_639_1: Language | null;
+  vote_average: number;
+  vote_count: number;
+  width: number
+}
+
 export {
   TrendingTimeSpan, Language, KeywordResult, List, Country, Response,
-  GenericListResult,
+  GenericListResult, Image,
 };

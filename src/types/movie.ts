@@ -1,8 +1,25 @@
 import Movie from '../models/movie/Movie';
 import Video from '../models/Video';
-import { Country, Language, List } from './generic';
+import {
+  Country, Image, Language, List,
+} from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
+
+type AppendToResponseMovie = 'account_states'
+| 'alternative_titles'
+| 'changes'
+| 'credits'
+| 'external_ids'
+| 'images'
+| 'keywords'
+| 'lists'
+| 'recommendations'
+| 'release_dates'
+| 'reviews'
+| 'similar'
+| 'translations'
+| 'videos'
 
 interface SearchMovieInput {
   query: string;
@@ -416,10 +433,17 @@ interface UpcomingInput {
   region?: Country;
 }
 
+interface ImagesResult {
+  id: number;
+  backdrops: Image[],
+  posters: Image[]
+}
+
 export {
   MovieStatus, SearchMovieInput, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
   ExternalIdsResult, ListResult, MoviePageInput, ReleaseDateResults,
   TranslationResults, VideoResults, WatchProvidersResult,
   PopularInput, TopRatedInput, UpcomingInput,
+  AppendToResponseMovie, ImagesResult,
 };
