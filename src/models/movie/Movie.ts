@@ -3,7 +3,7 @@ import { MovieStatus } from '../../types/movie';
 import Genre from '../Genre';
 
 interface IMovieBasicData {
-    id: string;
+    id: number;
     poster_path: string;
     title: string;
     original_title: string
@@ -31,7 +31,7 @@ interface IMovieExtraData {
 }
 
 class Movie implements IMovieBasicData, IMovieExtraData {
-  id: string;
+  id: number;
 
   poster_path: string;
 
@@ -107,6 +107,7 @@ class Movie implements IMovieBasicData, IMovieExtraData {
     this.vote_count = data.vote_count;
   }
 
+  // TODO handle append_to_response data
   static fromJson(data: any): Movie {
     const initialData: IMovieBasicData = { ...data };
 
