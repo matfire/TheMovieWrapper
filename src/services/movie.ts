@@ -22,6 +22,7 @@ import {
   UpcomingInput,
   AppendToResponseMovie,
   ImagesResult,
+  MovieReviewResult,
 } from '../types/movie';
 
 class MovieService {
@@ -170,7 +171,6 @@ class MovieService {
     return data as ExternalIdsResult;
   }
 
-  // TODO Images Go Here
   async getImages(movieId: number, includeImageLanguage ?: Language[]): Promise<ImagesResult> {
     const { data } = await this.$http.get(`/movie/${movieId}/images`, {
       params: {
@@ -207,7 +207,15 @@ class MovieService {
     return data as ReleaseDateResults;
   }
 
-  // TODO Reviews Go Here
+  async getReviews(reviewsData: MoviePageInput): Promise<MovieReviewResult> {
+    const { data } = await this.$http.get(`/movie/${reviewsData.movieId}/reviews`, {
+      params: {
+        ...this.$http.defaults.params,
+        page: reviewsData.page,
+      },
+    });
+    return data as MovieReviewResult;
+  }
 
   async getSimilar(similarData: MoviePageInput): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get(`/movie/${similarData.movieId}/similar`, { params: { ...this.$http.defaults.params, language: this.language, page: similarData.page } });

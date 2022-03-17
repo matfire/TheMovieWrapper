@@ -1,7 +1,8 @@
 import Movie from '../models/movie/Movie';
 import Video from '../models/Video';
 import {
-  Country, Image, Language, List,
+  Author,
+  Country, GenericListResult, GenericListResult, Image, Language, List,
 } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
@@ -439,11 +440,25 @@ interface ImagesResult {
   posters: Image[]
 }
 
+interface MovieReview {
+  author: string;
+  author_details: Author;
+  content: string;
+  created_at: Date;
+  id: string;
+  updated_at: Date;
+  url: string;
+}
+
+interface MovieReviewResult extends GenericListResult<MovieReview> {
+  id: string;
+};
+
 export {
   MovieStatus, SearchMovieInput, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
   ExternalIdsResult, ListResult, MoviePageInput, ReleaseDateResults,
   TranslationResults, VideoResults, WatchProvidersResult,
   PopularInput, TopRatedInput, UpcomingInput,
-  AppendToResponseMovie, ImagesResult,
+  AppendToResponseMovie, ImagesResult, MovieReviewResult,
 };

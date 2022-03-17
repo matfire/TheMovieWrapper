@@ -103,3 +103,10 @@ test('get images', async () => {
 
   expect(clientRes).toStrictEqual(httpRes.data);
 });
+
+test('get reviews', async () => {
+  const clientRes = await client.movies.getReviews({ movieId: 299564 });
+  const httpRes = await client.$http.get('/movie/299564/reviews');
+
+  expect(clientRes).toStrictEqual(httpRes.data);
+});
