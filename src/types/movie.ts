@@ -1,9 +1,8 @@
 import Movie from '../models/movie/Movie';
-import Video from '../models/Video';
 import {
   Author,
   Cast,
-  Country, Crew, GenericListResult, Image, Language, List,
+  Country, Crew, GenericListResult, Image, Language, List, Video,
 } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
@@ -111,9 +110,7 @@ interface ReleaseDateResults {
   }[]
 }
 
-interface TranslationResults {
-  id: number;
-  translations: {
+interface Translation {
     iso_3166_1: Country;
     iso_639_1: Language;
     name: string;
@@ -123,7 +120,11 @@ interface TranslationResults {
       overview: string;
       homepage: string;
     }
-  }[]
+  }
+
+interface TranslationResults {
+  id: number;
+  translations: Translation[]
 }
 
 interface VideoResults {
@@ -468,5 +469,5 @@ export {
   TranslationResults, VideoResults, WatchProvidersResult,
   PopularInput, TopRatedInput, UpcomingInput,
   AppendToResponseMovie, ImagesResult, MovieReviewResult,
-  CreditsResult,
+  CreditsResult, MovieReview, Translation,
 };

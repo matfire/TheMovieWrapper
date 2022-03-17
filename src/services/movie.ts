@@ -1,6 +1,5 @@
 import { AxiosInstance } from 'axios';
 import Movie from '../models/movie/Movie';
-import Video from '../models/Video';
 import {
   GenericListResult,
   KeywordResult, Language, Response, TrendingTimeSpan,
@@ -243,10 +242,7 @@ class MovieService {
 
   async getVideos(movieId: number): Promise<VideoResults> {
     const { data } = await this.$http.get(`/movie/${movieId}/videos`, { params: { ...this.$http.defaults.params, language: this.language } });
-    return {
-      id: data.id,
-      results: data.results.map((e:any) => Video.fromJson(e)),
-    };
+    return data as VideoResults;
   }
 
   async getWatchProviders(movieId: number): Promise<WatchProvidersResult> {

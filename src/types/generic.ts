@@ -326,7 +326,20 @@ interface Crew extends Person {
   job: string;
 }
 
+interface Video {
+  iso_639_1: Language;
+iso_3166_1: Country;
+name: string
+key: string
+site: string
+size: number
+type: string
+official: boolean
+published_at: Date
+id : string
+}
+
 export {
   TrendingTimeSpan, Language, KeywordResult, List, Country, Response,
-  GenericListResult, Image, Author, Cast, Crew,
+  GenericListResult, Image, Author, Cast, Crew, Video,
 };

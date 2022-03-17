@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import API from '../../index';
-import Video from '../../models/Video';
-import { Country } from '../../types/generic';
+import { Country, Video } from '../../types/generic';
 
 let client: API;
 
@@ -86,8 +85,9 @@ test('get translations for movie', async () => {
 });
 
 test('get videos for movie', async () => {
-  const res = await client.movies.getVideos(299534);
-  expect(res.results.pop()).toBeInstanceOf(Video);
+  const clientRes = await client.movies.getVideos(299534);
+  const httpRes = await client.$http.get('/movie/299534/videos');
+  expect(clientRes).toStrictEqual(httpRes.data);
 });
 
 test('get watch providers for movie', async () => {
@@ -116,4 +116,16 @@ test('get credits', async () => {
   const httpRes = await client.$http.get('/movie/299564/credits');
 
   expect(clientRes).toStrictEqual(httpRes.data);
+});
+
+test('append to response', async () => {
+  const clientRes = await client.movies.getMovie(299564, ['images', 'keywords']);
+  const httpRes = await client.$http.get('/movie/299564', {
+    params: {
+      ...client.$http.defaults.params,
+      append_to_response: 'images,keywords',
+    },
+  });
+  expect(clientRes.images).toStrictEqual(httpRes.data.images);
+  expect(clientRes.keywords).toStrictEqual(httpRes.data.keywords.keywords);
 });
