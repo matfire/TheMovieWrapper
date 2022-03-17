@@ -2,7 +2,8 @@ import Movie from '../models/movie/Movie';
 import Video from '../models/Video';
 import {
   Author,
-  Country, GenericListResult, Image, Language, List,
+  Cast,
+  Country, Crew, GenericListResult, Image, Language, List,
 } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
@@ -454,6 +455,12 @@ interface MovieReviewResult extends GenericListResult<MovieReview> {
   id: string;
 }
 
+interface CreditsResult {
+  id: number;
+  cast: Cast[];
+  crew: Crew[]
+}
+
 export {
   MovieStatus, SearchMovieInput, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
@@ -461,4 +468,5 @@ export {
   TranslationResults, VideoResults, WatchProvidersResult,
   PopularInput, TopRatedInput, UpcomingInput,
   AppendToResponseMovie, ImagesResult, MovieReviewResult,
+  CreditsResult,
 };

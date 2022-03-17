@@ -303,7 +303,30 @@ interface Author {
   rating: number | null;
 }
 
+interface Person {
+  adult: boolean;
+  gender: number | null;
+  id: number;
+  known_for_department: string;
+  name: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string | null;
+  credit_id: number;
+}
+
+interface Cast extends Person {
+  cast_id: number;
+  character: string;
+  order: number;
+}
+
+interface Crew extends Person {
+  department: string;
+  job: string;
+}
+
 export {
   TrendingTimeSpan, Language, KeywordResult, List, Country, Response,
-  GenericListResult, Image, Author,
+  GenericListResult, Image, Author, Cast, Crew,
 };

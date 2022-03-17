@@ -110,3 +110,10 @@ test('get reviews', async () => {
 
   expect(clientRes).toStrictEqual(httpRes.data);
 });
+
+test('get credits', async () => {
+  const clientRes = await client.movies.getCredits(299564);
+  const httpRes = await client.$http.get('/movie/299564/credits');
+
+  expect(clientRes).toStrictEqual(httpRes.data);
+});

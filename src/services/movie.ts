@@ -23,6 +23,7 @@ import {
   AppendToResponseMovie,
   ImagesResult,
   MovieReviewResult,
+  CreditsResult,
 } from '../types/movie';
 
 class MovieService {
@@ -164,7 +165,15 @@ class MovieService {
     };
   }
 
-  // TODO Credits Go Here
+  async getCredits(movieId: number): Promise<CreditsResult> {
+    const { data } = await this.$http.get(`/movie/${movieId}/credits`, {
+      params: {
+        ...this.$http.defaults.params,
+        language: this.language,
+      },
+    });
+    return data as CreditsResult;
+  }
 
   async getExternalIds(movieId: number): Promise<ExternalIdsResult> {
     const { data } = await this.$http.get(`/movie/${movieId}/external_ids`);
