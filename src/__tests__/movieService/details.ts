@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import API from '../../index';
-import { Country, Video } from '../../types/generic';
+import { Country } from '../../types/generic';
 
 let client: API;
 
