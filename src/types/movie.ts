@@ -2,7 +2,7 @@ import Movie from '../models/movie/Movie';
 import Video from '../models/Video';
 import {
   Author,
-  Country, GenericListResult, GenericListResult, Image, Language, List,
+  Country, GenericListResult, Image, Language, List,
 } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
@@ -452,7 +452,7 @@ interface MovieReview {
 
 interface MovieReviewResult extends GenericListResult<MovieReview> {
   id: string;
-};
+}
 
 export {
   MovieStatus, SearchMovieInput, NowPlayingMovieResult,
