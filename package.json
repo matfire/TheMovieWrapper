@@ -1,6 +1,6 @@
 {
   "name": "@matfire/the_movie_wrapper",
-  "version": "0.3.3",
+  "version": "0.3.6",
   "description": "",
   "scripts": {
     "build": "npx tsc -p tsconfig.build.json",

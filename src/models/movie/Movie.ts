@@ -69,25 +69,25 @@ interface IMovieExtraData {
     vote_count?: number;
 }
 
-interface Change {
+interface Change<T> {
   key: string;
   items: {
     id: string;
     action: string;
-    time: Date;
+    time: T;
     iso_639_1: Language;
     value: string;
     original_value: string;
   }[]
 }
 
-interface ReleaseDate {
+interface ReleaseDate<T> {
   iso_3166_1: Country,
   release_dates: {
     certification: string;
     iso_639_1: Language;
     note: string;
-    release_date: Date;
+    release_date: T;
     type: number;
   }[]
 }
@@ -107,7 +107,7 @@ interface MovieExport {
   original_language?: Language;
   overview?: string;
   popularity?: number;
-  release_date?: Date;
+  release_date?: string;
   revenue?: number;
   runtime?: number;
   status?: MovieStatus;
@@ -122,12 +122,12 @@ interface MovieExport {
   account_states: AccountStates | undefined;
   alternative_titles: Title[] | undefined;
   external_ids: ExternalIds | undefined;
-  changes: Change[] | undefined;
+  changes: Change<string>[] | undefined;
   keywords: Keyword[] | undefined;
   lists: GenericListResult<List> | undefined;
   // eslint-disable-next-line no-use-before-define
   recommendations: GenericListResult<MovieExport> | undefined;
-  release_dates: ReleaseDate[] | undefined;
+  release_dates: ReleaseDate<string>[] | undefined;
   reviews: GenericListResult<MovieReview> | undefined;
   // eslint-disable-next-line no-use-before-define
   similar: GenericListResult<MovieExport> | undefined;
@@ -193,7 +193,7 @@ class Movie implements IMovieBasicData, IMovieExtraData {
 
   external_ids: ExternalIds | undefined;
 
-  changes: Change[] | undefined;
+  changes: Change<Date>[] | undefined;
 
   keywords: Keyword[] | undefined;
 
@@ -202,7 +202,7 @@ class Movie implements IMovieBasicData, IMovieExtraData {
   // eslint-disable-next-line no-use-before-define
   recommendations: GenericListResult<Movie> | undefined;
 
-  release_dates: ReleaseDate[] | undefined;
+  release_dates: ReleaseDate<Date>[] | undefined;
 
   reviews: GenericListResult<MovieReview> | undefined;
 
@@ -316,6 +316,23 @@ class Movie implements IMovieBasicData, IMovieExtraData {
         ...this.similar,
         results: this.similar?.results.map((e) => e.toJSON()),
       },
+      release_date: this.release_date?.toString(),
+      release_dates: this.release_dates?.map((e) => ({
+        ...e,
+        release_dates: e.release_dates.map((x) => ({
+          ...x,
+          release_date: x.release_date.toString(),
+        })),
+      })),
+      changes: this.changes?.map((e) => (
+        {
+          ...e,
+          items: e.items.map((x) => ({
+            ...x,
+            time: x.time.toString(),
+          })),
+        }
+      )),
     };
   }
 }
