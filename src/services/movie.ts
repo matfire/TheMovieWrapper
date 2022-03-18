@@ -23,6 +23,7 @@ import {
   ImagesResult,
   MovieReviewResult,
   CreditsResult,
+  AccountStatesResult,
 } from '../types/movie';
 
 class MovieService {
@@ -61,6 +62,7 @@ class MovieService {
       params: {
         ...this.$http.defaults.params,
         language: this.language,
+        session_id: this.session_id,
         append_to_response: appendToResponse?.join(','),
       },
     });
@@ -263,6 +265,14 @@ class MovieService {
     });
 
     return data as Response;
+  }
+
+  async getAccountStates(movieId: number): Promise<AccountStatesResult> {
+    const { data } = await this.$http.delete(`/movie/${movieId}/account_states`, {
+      params: { ...this.$http.defaults.params, session_id: this.session_id },
+    });
+
+    return data as AccountStatesResult;
   }
 
   setSessionId(sId: string) {

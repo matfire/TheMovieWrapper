@@ -462,6 +462,15 @@ interface CreditsResult {
   crew: Crew[]
 }
 
+interface AccountStatesResult {
+  id: number;
+  favorite: boolean;
+  rated: {
+    value: number;
+  } | boolean;
+  watchlist: boolean
+}
+
 export {
   MovieStatus, SearchMovieInput, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
@@ -469,5 +478,5 @@ export {
   TranslationResults, VideoResults, WatchProvidersResult,
   PopularInput, TopRatedInput, UpcomingInput,
   AppendToResponseMovie, ImagesResult, MovieReviewResult,
-  CreditsResult, MovieReview, Translation,
+  CreditsResult, MovieReview, Translation, AccountStatesResult,
 };
