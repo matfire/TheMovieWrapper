@@ -92,6 +92,48 @@ interface ReleaseDate {
   }[]
 }
 
+interface MovieExport {
+  id: number;
+  poster_path: string;
+  title: string;
+  original_title: string;
+  adult?: boolean;
+  backdrop_path?: string;
+  belongs_to_collection?: null | object;
+  budget?: number;
+  genres: Genre[];
+  homepage?: string;
+  imdb_id?: string;
+  original_language?: Language;
+  overview?: string;
+  popularity?: number;
+  release_date?: Date;
+  revenue?: number;
+  runtime?: number;
+  status?: MovieStatus;
+  tagline?: string;
+  video?: boolean;
+  vote_average?: number;
+  vote_count?: number;
+  rating?: number;
+  credits: Credits | undefined;
+  images: Images | undefined;
+  videos: Video[] | undefined;
+  account_states: AccountStates | undefined;
+  alternative_titles: Title[] | undefined;
+  external_ids: ExternalIds | undefined;
+  changes: Change[] | undefined;
+  keywords: Keyword[] | undefined;
+  lists: GenericListResult<List> | undefined;
+  // eslint-disable-next-line no-use-before-define
+  recommendations: GenericListResult<MovieExport> | undefined;
+  release_dates: ReleaseDate[] | undefined;
+  reviews: GenericListResult<MovieReview> | undefined;
+  // eslint-disable-next-line no-use-before-define
+  similar: GenericListResult<MovieExport> | undefined;
+  translations: Translation[] | undefined;
+}
+
 class Movie implements IMovieBasicData, IMovieExtraData {
   id: number;
 
@@ -251,7 +293,6 @@ class Movie implements IMovieBasicData, IMovieExtraData {
     return this;
   }
 
-  // TODO handle append_to_response data
   static fromJson(data: any): Movie {
     const initialData: IMovieBasicData = { ...data };
 
@@ -262,6 +303,20 @@ class Movie implements IMovieBasicData, IMovieExtraData {
   addRating(r: number): Movie {
     this.rating = r;
     return this;
+  }
+
+  toJSON(): MovieExport {
+    return {
+      ...this,
+      recommendations: {
+        ...this.recommendations,
+        results: this.recommendations?.results.map((e) => e.toJSON()),
+      },
+      similar: {
+        ...this.similar,
+        results: this.similar?.results.map((e) => e.toJSON()),
+      },
+    };
   }
 }
 

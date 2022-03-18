@@ -1,13 +1,14 @@
 {
   "name": "@matfire/the_movie_wrapper",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "",
   "scripts": {
     "build": "npx tsc -p tsconfig.build.json",
     "prepare": "husky install",
     "lint": "npx eslint src/**/*.ts --fix",
     "test": "jest --runInBand",
-    "test:dev": "jest --watch -f --runInBand"
+    "test:dev": "jest --watch -f --runInBand",
+    "deploy": "rm -rf lib/ ; npm run build && npm publish"
   },
   "keywords": [
     "tmdb",
