@@ -1,7 +1,17 @@
 /* eslint-disable no-use-before-define */
 import {
   Author,
-  Country, GenericListResult, Genre, Image, Language, List, Video, Cast, Crew,
+  Country,
+  GenericListResult,
+  Genre,
+  Image,
+  Language,
+  List,
+  Video,
+  Cast,
+  Crew,
+  ProductionCompany,
+  ProductionCountry,
 } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
@@ -534,8 +544,8 @@ interface Movie {
   overview: string | null;
   popularity: number;
   poster_path: string | null;
-  production_companies: any // TODO add interface for companies
-  production_countries: any // TODO add interface for country
+  production_companies: ProductionCompany[] | null
+  production_countries: ProductionCountry[] | null
   release_date: Date;
   revenue: number;
   runtime: number | null;

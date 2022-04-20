@@ -344,7 +344,20 @@ interface Genre {
   name: string;
 }
 
+interface ProductionCountry {
+  iso_3166_1: Country;
+  name: string;
+}
+
+interface ProductionCompany {
+  name: string;
+  id: number;
+  logo_path: string | null;
+  origin_country: Country;
+}
+
 export {
   TrendingTimeSpan, Language, KeywordResult, List, Country, Response,
   GenericListResult, Image, Author, Cast, Crew, Video, Genre,
+  ProductionCompany, ProductionCountry,
 };
