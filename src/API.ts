@@ -19,7 +19,7 @@ class API {
 
   private imageUrl = 'https://image.tmdb.org/t/p/';
 
-  private sessionId: string | undefined;
+  private sessionId: number | undefined;
 
   constructor(apiKey:string) {
     this.apiKey = apiKey;
@@ -40,7 +40,7 @@ class API {
     return `${this.imageUrl}/${size}/${path}`;
   }
 
-  setSessionId(session: string) {
+  setSessionId(session: number) {
     this.sessionId = session;
     this.movies.setSessionId(session);
     this.account.setSessionId(session);

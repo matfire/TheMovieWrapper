@@ -12,9 +12,9 @@ import {
 class AccountService {
   $http: AxiosInstance;
 
-  session_id: string | undefined;
+  session_id: number | undefined;
 
-  account_id: string | undefined;
+  account_id: number | undefined;
 
   language: Language = 'en';
 
@@ -130,7 +130,7 @@ class AccountService {
 
   // TODO get tv show watchlist
 
-  setSessionId(sessionId: string) {
+  setSessionId(sessionId: number) {
     this.session_id = sessionId;
   }
 

@@ -28,7 +28,7 @@ import {
 } from '../types/movie';
 
 class MovieService {
-  private session_id?: string;
+  private session_id?: number;
 
   private $http: AxiosInstance;
 
@@ -283,7 +283,7 @@ class MovieService {
     return data as AccountStatesResult;
   }
 
-  setSessionId(sId: string) {
+  setSessionId(sId: number) {
     this.session_id = sId;
   }
 
