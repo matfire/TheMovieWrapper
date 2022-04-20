@@ -12,6 +12,7 @@ import {
   Crew,
   ProductionCompany,
   ProductionCountry,
+  SpokenLanguage,
 } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
@@ -549,7 +550,7 @@ interface Movie {
   release_date: Date;
   revenue: number;
   runtime: number | null;
-  spoken_languages: any // TODO add interface for spoken_language
+  spoken_languages: SpokenLanguage[] | null;
   status: MovieStatus;
   tagline: string | null;
   title: string;

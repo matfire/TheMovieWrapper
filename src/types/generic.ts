@@ -356,8 +356,14 @@ interface ProductionCompany {
   origin_country: Country;
 }
 
+interface SpokenLanguage {
+  english_name: string;
+  iso_639_1: Language;
+  name: string;
+}
+
 export {
   TrendingTimeSpan, Language, KeywordResult, List, Country, Response,
   GenericListResult, Image, Author, Cast, Crew, Video, Genre,
-  ProductionCompany, ProductionCountry,
+  ProductionCompany, ProductionCountry, SpokenLanguage,
 };
