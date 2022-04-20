@@ -339,7 +339,12 @@ published_at: Date
 id : string
 }
 
+interface Genre {
+  id: number;
+  name: string;
+}
+
 export {
   TrendingTimeSpan, Language, KeywordResult, List, Country, Response,
-  GenericListResult, Image, Author, Cast, Crew, Video,
+  GenericListResult, Image, Author, Cast, Crew, Video, Genre,
 };
