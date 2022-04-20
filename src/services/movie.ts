@@ -1,8 +1,7 @@
 import { AxiosInstance } from 'axios';
-import Movie from '../models/movie/Movie';
 import {
   GenericListResult,
-  KeywordResult, Language, Response, TrendingTimeSpan,
+  KeywordResult, Language, Response, TrendingTimeSpan, Video,
 } from '../types/generic';
 import {
   SearchMovieInput,
@@ -24,6 +23,8 @@ import {
   MovieReviewResult,
   CreditsResult,
   AccountStatesResult,
+  Movie,
+  Keyword,
 } from '../types/movie';
 
 class MovieService {
@@ -43,7 +44,7 @@ class MovieService {
       total_pages: data.total_pages,
       total_results: data.total_results,
       page,
-      results: data.results.map((e: any) => Movie.fromJson(e)),
+      results: data.results.map((e: any) => e as Movie),
     };
   }
 
@@ -53,7 +54,7 @@ class MovieService {
       page: input.page || 1,
       total_results: data.total_results,
       total_pages: data.total_pages,
-      results: data.results.map((e:any) => Movie.fromJson(e)),
+      results: data.results.map((e:any) => e as Movie),
     };
   }
 
@@ -66,12 +67,19 @@ class MovieService {
         append_to_response: appendToResponse?.join(','),
       },
     });
-    return Movie.fromJson(data);
+    const res = data as Movie;
+    if (data.keywords) {
+      res.keywords = data.keywords.keywords.map((e: any) => e as Keyword);
+    }
+    if (data.videos) {
+      res.videos = data.videos.results.map((e:any) => e as Video);
+    }
+    return res;
   }
 
   async getLatest(): Promise<Movie> {
     const { data } = await this.$http.get('/movie/latest', { params: { ...this.$http.defaults.params, language: this.language } });
-    return Movie.fromJson(data);
+    return data as Movie;
   }
 
   async getNowPlaying(): Promise<NowPlayingMovieResult> {
@@ -85,7 +93,7 @@ class MovieService {
         maximum: new Date(data.dates.maximum),
         minimum: new Date(data.dates.minimum),
       },
-      results: data.results.map((e: any) => Movie.fromJson(e)),
+      results: data.results.map((e: any) => e as Movie),
     };
   }
 
@@ -102,7 +110,7 @@ class MovieService {
       page: data.page,
       total_pages: data.total_pages,
       total_results: data.total_results,
-      results: data.results.map((e: any) => Movie.fromJson(e)),
+      results: data.results.map((e: any) => e as Movie),
     };
   }
 
@@ -120,7 +128,7 @@ class MovieService {
       page: data.page,
       total_pages: data.total_pages,
       total_results: data.total_results,
-      results: data.results.map((e: any) => Movie.fromJson(e)),
+      results: data.results.map((e: any) => e as Movie),
     };
   }
 
@@ -138,7 +146,7 @@ class MovieService {
       page: data.page,
       total_pages: data.total_pages,
       total_results: data.total_results,
-      results: data.results.map((e: any) => Movie.fromJson(e)),
+      results: data.results.map((e: any) => e as Movie),
     };
   }
 
@@ -208,7 +216,7 @@ class MovieService {
       page: data.page,
       total_pages: data.total_pages,
       total_results: data.total_results,
-      results: data.results.map((e: any) => Movie.fromJson(e)),
+      results: data.results.map((e: any) => e as Movie),
     };
   }
 
@@ -233,7 +241,7 @@ class MovieService {
       page: data.page,
       total_pages: data.total_pages,
       total_results: data.total_results,
-      results: data.results.map((e: any) => Movie.fromJson(e)),
+      results: data.results.map((e: any) => e as Movie),
     };
   }
 
