@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import Movie from '../models/movie/Movie';
+import { Movie } from '../types/movie';
 import {
   AccountDetailsResults,
   CreatedListsInput,
@@ -57,7 +57,7 @@ class AccountService {
       page: data.page,
       total_pages: data.total_pages,
       total_results: data.total_results,
-      results: data.results.map((e:any) => Movie.fromJson(e)),
+      results: data.results.map((e:any) => e as Movie),
     };
   }
 
@@ -90,7 +90,7 @@ class AccountService {
       page: data.page,
       total_pages: data.total_pages,
       total_results: data.total_results,
-      results: data.results.map((e:any) => Movie.fromJson(e).addRating(parseInt(e.rating, 10))),
+      results: data.results.map((e:any) => e as Movie),
     };
   }
 
@@ -124,7 +124,7 @@ class AccountService {
       page: data.page,
       total_pages: data.total_pages,
       total_results: data.total_results,
-      results: data.results.map((e:any) => Movie.fromJson(e)),
+      results: data.results.map((e:any) => e as Movie),
     };
   }
 

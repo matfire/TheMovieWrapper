@@ -119,13 +119,16 @@ test('get credits', async () => {
 });
 
 test('append to response', async () => {
-  const clientRes = await client.movies.getMovie(299564, ['images', 'keywords']);
+  const clientRes = await client.movies.getMovie(299564, ['images', 'keywords', 'videos', 'credits', 'lists']);
   const httpRes = await client.$http.get('/movie/299564', {
     params: {
       ...client.$http.defaults.params,
-      append_to_response: 'images,keywords',
+      append_to_response: 'images,keywords,videos,credits,lists',
     },
   });
   expect(clientRes.images).toStrictEqual(httpRes.data.images);
   expect(clientRes.keywords).toStrictEqual(httpRes.data.keywords.keywords);
+  expect(clientRes.videos).toStrictEqual(httpRes.data.videos.results);
+  expect(clientRes.credits).toStrictEqual(httpRes.data.credits);
+  expect(clientRes.lists).toStrictEqual(httpRes.data.lists);
 });

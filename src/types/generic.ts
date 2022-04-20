@@ -339,7 +339,31 @@ published_at: Date
 id : string
 }
 
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface ProductionCountry {
+  iso_3166_1: Country;
+  name: string;
+}
+
+interface ProductionCompany {
+  name: string;
+  id: number;
+  logo_path: string | null;
+  origin_country: Country;
+}
+
+interface SpokenLanguage {
+  english_name: string;
+  iso_639_1: Language;
+  name: string;
+}
+
 export {
   TrendingTimeSpan, Language, KeywordResult, List, Country, Response,
-  GenericListResult, Image, Author, Cast, Crew, Video,
+  GenericListResult, Image, Author, Cast, Crew, Video, Genre,
+  ProductionCompany, ProductionCountry, SpokenLanguage,
 };

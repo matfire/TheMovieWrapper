@@ -1,8 +1,18 @@
-import Movie from '../models/movie/Movie';
+/* eslint-disable no-use-before-define */
 import {
   Author,
+  Country,
+  GenericListResult,
+  Genre,
+  Image,
+  Language,
+  List,
+  Video,
   Cast,
-  Country, Crew, GenericListResult, Image, Language, List, Video,
+  Crew,
+  ProductionCompany,
+  ProductionCountry,
+  SpokenLanguage,
 } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
@@ -471,6 +481,93 @@ interface AccountStatesResult {
   watchlist: boolean
 }
 
+interface Credits {
+  cast: Cast[];
+
+  crew: Crew[];
+}
+
+interface Images {
+  backdrops: Image[],
+  posters: Image[],
+  logos: Image[]
+}
+
+interface AccountStates {
+  favorite: boolean,
+  rated: {
+    value: number
+  } | boolean,
+  watchlist: boolean,
+}
+
+interface Title {
+  iso_3166_1: Country,
+  title: string,
+  type: string
+}
+
+interface ExternalIds {
+  imdb_id?: string,
+  facebook_id?: string,
+  instagram_id?: string,
+  twitter_id?: string
+}
+
+interface Keyword {
+  id: number;
+  name: string;
+}
+
+interface Change<T> {
+  key: string;
+  items: {
+    id: string;
+    action: string;
+    time: T;
+    iso_639_1: Language;
+    value: string;
+    original_value: string;
+  }[]
+}
+
+interface Movie {
+  adult: boolean;
+  backdrop_path: string | null;
+  belongs_to_collection: any | null;
+  budget: number;
+  genres: Genre[];
+  homepage: string | null;
+  id: number;
+  imdb_id: string | null;
+  original_language: string;
+  original_title: string;
+  overview: string | null;
+  popularity: number;
+  poster_path: string | null;
+  production_companies: ProductionCompany[] | null
+  production_countries: ProductionCountry[] | null
+  release_date: Date;
+  revenue: number;
+  runtime: number | null;
+  spoken_languages: SpokenLanguage[] | null;
+  status: MovieStatus;
+  tagline: string | null;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+  credits: Credits | null;
+  images: Images | null;
+  videos: Video[] | null;
+  account_states: AccountStates | null;
+  alternative_titles: Title[] | null;
+  external_ids: ExternalIds | null;
+  changes: Change<Date> | null;
+  keywords: Keyword[] | null;
+  lists: GenericListResult<List> | null;
+}
+
 export {
   MovieStatus, SearchMovieInput, NowPlayingMovieResult,
   AlternativeTitlesResult, AlternativeTitlesInput, ChangesInput, ChangesResult,
@@ -479,4 +576,5 @@ export {
   PopularInput, TopRatedInput, UpcomingInput,
   AppendToResponseMovie, ImagesResult, MovieReviewResult,
   CreditsResult, MovieReview, Translation, AccountStatesResult,
+  Movie, Keyword,
 };
