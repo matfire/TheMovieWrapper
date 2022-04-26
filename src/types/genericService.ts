@@ -2,11 +2,11 @@ import { AxiosInstance } from 'axios';
 import { Language } from './generic';
 
 class GenericService {
-  private session_id?: number;
+  protected session_id?: number;
 
-  private $http: AxiosInstance;
+  protected $http: AxiosInstance;
 
-  private language: Language = 'en';
+  protected language: Language = 'en';
 
   constructor(client: AxiosInstance) {
     this.$http = client;
