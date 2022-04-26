@@ -1,8 +1,8 @@
-import { AxiosInstance } from 'axios';
 import {
   GenericListResult,
   KeywordResult, Language, Response, TrendingTimeSpan, Video,
 } from '../types/generic';
+import GenericService from '../types/genericService';
 import {
   SearchMovieInput,
   NowPlayingMovieResult,
@@ -27,17 +27,7 @@ import {
   Keyword,
 } from '../types/movie';
 
-class MovieService {
-  private session_id?: number;
-
-  private $http: AxiosInstance;
-
-  private language: Language = 'en';
-
-  constructor(client: AxiosInstance) {
-    this.$http = client;
-  }
-
+class MovieService extends GenericService {
   async getTrending(timeSpan: TrendingTimeSpan, page = 1): Promise<GenericListResult<Movie>> {
     const { data } = await this.$http.get(`/trending/movie/${timeSpan}`, { params: { ...this.$http.defaults.params, page, language: this.language } });
     return {
@@ -282,12 +272,6 @@ class MovieService {
 
     return data as AccountStatesResult;
   }
-
-  setSessionId(sId: number) {
-    this.session_id = sId;
-  }
-
-  setLanguage(l:Language) { this.language = l; }
 }
 
 export default MovieService;
