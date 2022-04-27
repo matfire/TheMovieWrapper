@@ -16,5 +16,11 @@ interface TV {
   popularity: number;
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export { TV };
+interface SearchTVInput {
+  query: string;
+  page?: number;
+  include_adult?: boolean;
+  first_air_date_year ?: number;
+}
+
+export { TV, SearchTVInput };
