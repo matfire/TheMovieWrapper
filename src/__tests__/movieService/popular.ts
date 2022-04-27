@@ -7,7 +7,7 @@ let client: API;
 let clientRes: GenericListResult<Movie>;
 let res: { data: { results: string | any[]; total_pages: any; total_results: any; }; };
 
-describe('Popular Movie', () => {
+describe('Movie Service', () => {
   beforeAll(async () => {
     client = new API(process.env.TMDB_KEY!);
     clientRes = await client.movies.getPopular();
