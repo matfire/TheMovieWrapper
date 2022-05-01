@@ -8,22 +8,22 @@ let client: API;
 let clientRes: GenericListResult<TV>;
 let res: AxiosResponse<any, any>;
 
-describe('TV Service', () => {
+describe("TV Service", () => {
   beforeAll(async () => {
     client = new API(process.env.TMDB_KEY!);
-    clientRes = await client.tv.getPopular();
-    res = await client.$http.get('/tv/popular');
+    clientRes = await client.tv.getAiringToday();
+    res = await client.$http.get('/tv/airing_today');
   });
 
-  test('popular tv result length', async () => {
+  test('airing shows result length', async () => {
     expect(clientRes.results.length).toBe(res.data.results.length);
   });
 
-  test('popular tv total pages', async () => {
+  test('airing shows total pages', async () => {
     expect(clientRes.total_pages).toBe(res.data.total_pages);
   });
 
-  test('get popular tv total results', async () => {
+  test('get airing shows total results', async () => {
     expect(clientRes.total_results).toBe(res.data.total_results);
   });
 });

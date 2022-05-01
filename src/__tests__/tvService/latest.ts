@@ -8,7 +8,7 @@ describe('TV Service', () => {
     client = new API(process.env.TMDB_KEY!);
   });
 
-  test('get latest movie', async () => {
+  test('get latest tv show', async () => {
     const clientRes = await client.tv.getLatest();
 
     expect(clientRes.id).toBeDefined();

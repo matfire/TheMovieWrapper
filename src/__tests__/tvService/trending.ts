@@ -15,15 +15,15 @@ describe('TV Service', () => {
     res = await client.$http.get('/trending/tv/day');
   });
 
-  test('trending movie result length', async () => {
+  test('trending tv shows result length', async () => {
     expect(clientRes.results.length).toBe(res.data.results.length);
   });
 
-  test('trending movie total pages', async () => {
+  test('trending tv shows total pages', async () => {
     expect(clientRes.total_pages).toBe(res.data.total_pages);
   });
 
-  test('get trending movie total results', async () => {
+  test('get trending tv shows total results', async () => {
     expect(clientRes.total_results).toBe(res.data.total_results);
   });
 });

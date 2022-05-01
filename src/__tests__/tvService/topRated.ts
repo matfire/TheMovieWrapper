@@ -15,15 +15,15 @@ describe('TV Service', () => {
     res = await client.$http.get('/tv/top_rated');
   });
 
-  test('top rated movie result length', async () => {
+  test('top rated tv shows result length', async () => {
     expect(clientRes.results.length).toBe(res.data.results.length);
   });
 
-  test('top rated movie total pages', async () => {
+  test('top rated tv shows total pages', async () => {
     expect(clientRes.total_pages).toBe(res.data.total_pages);
   });
 
-  test('get top rated movie total results', async () => {
+  test('get top rated tv shows total results', async () => {
     expect(clientRes.total_results).toBe(res.data.total_results);
   });
 });

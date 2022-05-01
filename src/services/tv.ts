@@ -37,6 +37,13 @@ class TVService extends GenericService {
     });
     return data;
   }
+
+  async getAiringToday(page ?: number): Promise<GenericListResult<TV>> {
+    const { data } = await this.$http.get('/tv/airing_today', {
+      params: { ...this.$http.defaults.params, page, language: this.language },
+    });
+    return data;
+  }
 }
 
 export default TVService;
