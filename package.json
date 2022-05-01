@@ -7,7 +7,12 @@
     "prepare": "husky install",
     "lint": "npx eslint src/**/*.ts --fix",
     "test": "jest --runInBand",
-    "test:dev": "jest --watch -f --runInBand",
+    "test:watch:fail": "jest --watch -f",
+    "test:watch": "jest --watch",
+    "test:tv": "jest -t 'TV Service'",
+    "test:tv:watch": "jest -t 'TV Service' --watch",
+    "test:movie": "jest -t 'TV Service'",
+    "test:movie:watch": "jest -t 'Movie Service' --watch",
     "deploy": "rm -rf lib/ ; npm run build && npm publish"
   },
   "keywords": [
