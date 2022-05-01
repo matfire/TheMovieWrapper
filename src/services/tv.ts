@@ -47,7 +47,7 @@ class TVService extends GenericService {
 
   async getOnAir(page ?: number): Promise<GenericListResult<TV>> {
     const { data } = await this.$http.get('/tv/on_the_air', {
-      params: { ...this.$http.defaults.params, page, language: this.language},
+      params: { ...this.$http.defaults.params, page, language: this.language },
     });
     return data;
   }
