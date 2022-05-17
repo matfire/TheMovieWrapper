@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 import { AxiosResponse } from 'axios';
 import API from '../../index';
-import { GenericListResult } from '../../types/generic';
-import { TVDetails } from '../../types/tv';
 
 let client: API;
 let res: AxiosResponse<any, any>;
