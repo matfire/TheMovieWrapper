@@ -51,6 +51,14 @@ class TVService extends GenericService {
     });
     return data;
   }
+
+  async getDetails(id : number): Promise<TVDetails> {
+    const { data } = await this.$http.get(`/tv/${id}`, {
+      params: { ...this.$http.defaults.params, language: this.language },
+    });
+
+    return data;
+  }
 }
 
 export default TVService;
