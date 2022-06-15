@@ -1,28 +1,29 @@
 /* eslint-disable no-undef */
 import { AxiosResponse } from 'axios';
 import API from '../../index';
-import { NowPlayingMovieResult } from '../../types/movie';
+import { GenericListResult } from '../../types/generic';
+import { TV } from '../../types/tv';
 
 let client: API;
-let clientRes: NowPlayingMovieResult;
+let clientRes: GenericListResult<TV>;
 let res: AxiosResponse<any, any>;
 
-describe('Movie Service', () => {
+describe('TV Service', () => {
   beforeAll(async () => {
     client = new API(process.env.TMDB_KEY!);
-    clientRes = await client.movies.getNowPlaying();
-    res = await client.$http.get('/movie/now_playing');
+    clientRes = await client.tv.getTopRated();
+    res = await client.$http.get('/tv/top_rated');
   });
 
-  test('trending movie result length', async () => {
+  test('top rated tv shows result length', async () => {
     expect(clientRes.results.length).toBe(res.data.results.length);
   });
 
-  test('trending movie total pages', async () => {
+  test('top rated tv shows total pages', async () => {
     expect(clientRes.total_pages).toBe(res.data.total_pages);
   });
 
-  test('get trending movie total results', async () => {
+  test('get top rated tv shows total results', async () => {
     expect(clientRes.total_results).toBe(res.data.total_results);
   });
 });
