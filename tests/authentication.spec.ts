@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import API from '../index';
+import API from '../src/index';
 
 let client: API;
 

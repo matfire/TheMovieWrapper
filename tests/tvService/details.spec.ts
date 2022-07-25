@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { AxiosResponse } from 'axios';
-import API from '../../index';
+import API from '../../src/index';
 
 let client: API;
 let res: AxiosResponse<any, any>;
