@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const { build } = require('esbuild');
 const { Generator } = require('npm-dts');
-const { dependencies, peerDependencies } = require('./package.json');
+const { dependencies } = require('./package.json');
 
 new Generator({
   entry: 'src/index.ts',

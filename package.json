@@ -1,7 +1,11 @@
 {
   "name": "@matfire/the_movie_wrapper",
-  "version": "0.6.0",
+  "version": "0.6.2",
   "description": "",
+  "repository": {
+    "url": "https://github.com/matfire/TheMovieWrapper",
+    "type": "github"
+  },
   "scripts": {
     "build": "node build.js",
     "prepare": "husky install",
@@ -12,8 +16,7 @@
     "test:tv": "jest -t 'TV Service'",
     "test:tv:watch": "jest -t 'TV Service' --watch",
     "test:movie": "jest -t 'TV Service'",
-    "test:movie:watch": "jest -t 'Movie Service' --watch",
-    "deploy": "rm -rf lib/ ; npm run build && npm publish"
+    "test:movie:watch": "jest -t 'Movie Service' --watch"
   },
   "keywords": [
     "tmdb",
