@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
-import API from '../../index';
-import { Country } from '../../types/generic';
+import API from '../../src/index';
+import { Country } from '../../src/types/generic';
+import {describe, beforeAll, test, expect} from "vitest"
 
 let client: API;
 

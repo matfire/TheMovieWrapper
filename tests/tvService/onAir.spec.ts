@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 import { AxiosResponse } from 'axios';
-import API from '../../index';
-import { GenericListResult } from '../../types/generic';
-import { TV } from '../../types/tv';
+import API from '../../src/index';
+import { GenericListResult } from '../../src/types/generic';
+import { TV } from '../../src/types/tv';
+import {describe, beforeAll, test, expect} from "vitest"
 
 let client: API;
 let clientRes: GenericListResult<TV>;
@@ -11,8 +12,8 @@ let res: AxiosResponse<any, any>;
 describe('TV Service', () => {
   beforeAll(async () => {
     client = new API(process.env.TMDB_KEY!);
-    clientRes = await client.tv.getAiringToday();
-    res = await client.$http.get('/tv/airing_today');
+    clientRes = await client.tv.getOnAir();
+    res = await client.$http.get('/tv/on_the_air');
   });
 
   test('airing shows result length', async () => {

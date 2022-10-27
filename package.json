@@ -1,19 +1,17 @@
 {
   "name": "@matfire/the_movie_wrapper",
-  "version": "0.5.1",
+  "version": "0.6.2",
   "description": "",
+  "repository": {
+    "url": "https://github.com/matfire/TheMovieWrapper",
+    "type": "github"
+  },
   "scripts": {
-    "build": "npx tsc -p tsconfig.build.json",
+    "build": "node build.js",
     "prepare": "husky install",
     "lint": "npx eslint src/**/*.ts --fix",
-    "test": "jest --runInBand",
-    "test:watch:fail": "jest --watch -f",
-    "test:watch": "jest --watch",
-    "test:tv": "jest -t 'TV Service'",
-    "test:tv:watch": "jest -t 'TV Service' --watch",
-    "test:movie": "jest -t 'TV Service'",
-    "test:movie:watch": "jest -t 'Movie Service' --watch",
-    "deploy": "rm -rf lib/ ; npm run build && npm publish"
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "tmdb",
@@ -21,24 +19,29 @@
     "api",
     "types"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "module": "dist/index.esm.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "author": "Matteo Gassend",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^27.4.0",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
+    "@vitest/coverage-c8": "^0.24.3",
     "dotenv": "^16.0.0",
+    "esbuild": "^0.14.49",
     "eslint": "^8.8.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-import": "^2.25.4",
     "husky": "^7.0.4",
-    "jest": "^27.5.1",
-    "ts-jest": "^27.1.3",
+    "npm-dts": "^1.3.12",
     "ts-node": "^10.5.0",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
+    "vitest": "^0.24.3"
   },
   "dependencies": {
     "axios": "^0.25.0"

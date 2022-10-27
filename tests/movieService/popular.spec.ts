@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
-import API from '../../index';
-import { Movie } from '../../types/movie';
-import { GenericListResult } from '../../types/generic';
+import API from '../../src/index';
+import { Movie } from '../../src/types/movie';
+import { GenericListResult } from '../../src/types/generic';
+import {describe, beforeAll, test, expect} from "vitest"
 
 let client: API;
 let clientRes: GenericListResult<Movie>;

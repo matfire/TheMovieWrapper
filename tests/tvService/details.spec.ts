@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { AxiosResponse } from 'axios';
-import API from '../../index';
+import API from '../../src/index';
+import {describe, beforeAll, test, expect} from "vitest"
 
 let client: API;
 let res: AxiosResponse<any, any>;

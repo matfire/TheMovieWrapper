@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 import { AxiosResponse } from 'axios';
-import API from '../../index';
-import { NowPlayingMovieResult } from '../../types/movie';
+import API from '../../src/index';
+import { NowPlayingMovieResult } from '../../src/types/movie';
+import {describe, beforeAll, test, expect} from "vitest"
 
 let client: API;
 let clientRes: NowPlayingMovieResult;
