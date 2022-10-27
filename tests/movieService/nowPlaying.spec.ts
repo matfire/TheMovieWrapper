@@ -2,6 +2,7 @@
 import { AxiosResponse } from 'axios';
 import API from '../../src/index';
 import { NowPlayingMovieResult } from '../../src/types/movie';
+import {describe, beforeAll, test, expect} from "vitest"
 
 let client: API;
 let clientRes: NowPlayingMovieResult;

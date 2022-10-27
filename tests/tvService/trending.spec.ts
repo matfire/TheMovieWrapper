@@ -3,6 +3,7 @@ import { AxiosResponse } from 'axios';
 import API from '../../src/index';
 import { GenericListResult } from '../../src/types/generic';
 import { TV } from '../../src/types/tv';
+import {describe, beforeAll, test, expect} from "vitest"
 
 let client: API;
 let clientRes: GenericListResult<TV>;
