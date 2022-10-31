@@ -12,9 +12,7 @@ class GenericService {
     this.$http = client;
   }
 
-  setSessionId(sId: number) {
-    this.session_id = sId;
-  }
+  setSessionId(sId: number) { this.session_id = sId; }
 
   setLanguage(l:Language) { this.language = l; }
 }

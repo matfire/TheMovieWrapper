@@ -24,6 +24,17 @@ class AuthenticationService {
     });
     return res.data as SessionResult;
   }
+
+  async createSessionWithLogin(username:string, password: string): Promise<NewTokenResult> {
+    const {request_token} = await this.getAuthenticationToken();
+    const res = await this.$http.post('/authentication/token/validate_with_login', {
+      request_token,
+      username,
+      password
+    })
+    return res.data as NewTokenResult;
+  }
+
 }
 
 export default AuthenticationService;
