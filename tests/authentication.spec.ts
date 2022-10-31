@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import API from '../src/index';
 
-import {describe, beforeAll, test, expect} from "vitest"
+import {describe, beforeAll, test, expect, assert} from "vitest"
 let client: API;
 
 describe('Authentication Service', () => {
@@ -14,4 +14,9 @@ describe('Authentication Service', () => {
 
     expect(url).toContain('?redirect_to=http://testUrl.com');
   });
+
+  test("get token from username + password", async() => {
+    const data = await client.auth.createSessionWithLogin(process.env.TMDB_USERNAME!, process.env.TMDB_PASSWORD!);
+    expect(data).toBeDefined();
+  })
 });
