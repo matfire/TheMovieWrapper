@@ -1,6 +1,6 @@
 {
   "name": "@matfire/the_movie_wrapper",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "",
   "repository": {
     "url": "https://github.com/matfire/TheMovieWrapper",
@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "node build.js",
+    "postbuild": "tsc --emitDeclarationOnly --declaration --project tsconfig.build.json",
     "prepare": "husky install",
     "lint": "npx eslint src/**/*.ts --fix",
     "test": "vitest run",
