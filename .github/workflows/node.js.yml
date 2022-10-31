@@ -11,6 +11,8 @@ on:
 
 env:
   TMDB_KEY: ${{ secrets.TMDB_KEY }}
+  TMDB_USERNAME: ${{ secrets.TMDB_USERNAME }}
+  TMDB_PASSWORD: ${{ secrets.TMDB_PASSWORD }}
 
 jobs:
   build:
