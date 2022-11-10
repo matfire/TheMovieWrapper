@@ -51,7 +51,8 @@ class TVService extends GenericService {
     });
     return data;
   }
-  //TODO add append to response
+
+  // TODO add append to response
   async getDetails(id : number): Promise<TVDetails> {
     const { data } = await this.$http.get(`/tv/${id}`, {
       params: { ...this.$http.defaults.params, language: this.language },

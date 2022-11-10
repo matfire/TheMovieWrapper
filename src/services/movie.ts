@@ -25,6 +25,7 @@ import {
   AccountStatesResult,
   Movie,
   Keyword,
+  MovieReview,
 } from '../types/movie';
 
 class MovieService extends GenericService {
@@ -58,12 +59,6 @@ class MovieService extends GenericService {
       },
     });
     const res = data as Movie;
-    if (data.keywords) {
-      res.keywords = data.keywords.keywords.map((e: any) => e as Keyword);
-    }
-    if (data.videos) {
-      res.videos = data.videos.results.map((e:any) => e as Video);
-    }
     return res;
   }
 
@@ -266,7 +261,7 @@ class MovieService extends GenericService {
   }
 
   async getAccountStates(movieId: number): Promise<AccountStatesResult> {
-    const { data } = await this.$http.delete(`/movie/${movieId}/account_states`, {
+    const { data } = await this.$http.get(`/movie/${movieId}/account_states`, {
       params: { ...this.$http.defaults.params, session_id: this.session_id },
     });
 

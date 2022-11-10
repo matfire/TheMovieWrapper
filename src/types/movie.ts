@@ -13,6 +13,7 @@ import {
   ProductionCompany,
   ProductionCountry,
   SpokenLanguage,
+  KeywordResult,
 } from './generic';
 
 type MovieStatus = 'Rumored' | 'Planned' | 'In Production' | 'Post Production' | 'Released' | 'Canceled' | 'Unknown';
@@ -559,12 +560,14 @@ interface Movie {
   vote_count: number;
   credits: Credits | null;
   images: Images | null;
-  videos: Video[] | null;
+  videos: VideoResults | null;
+  reviews: MovieReviewResult | null;
+  recommendations: GenericListResult<Movie>;
   account_states: AccountStates | null;
   alternative_titles: Title[] | null;
   external_ids: ExternalIds | null;
   changes: Change<Date> | null;
-  keywords: Keyword[] | null;
+  keywords: {keywords: {id:number, name:string}[]} | null;
   lists: GenericListResult<List> | null;
 }
 
