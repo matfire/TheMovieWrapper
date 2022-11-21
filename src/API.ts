@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import AccountService from './services/account';
 import AuthenticationService from './services/authentication';
+import GenreService from './services/genre';
 import MovieService from './services/movie';
 import TVService from './services/tv';
 import { Language } from './types/generic';
@@ -18,6 +19,8 @@ class API {
 
   account: AccountService;
 
+  genre: GenreService;
+
   language: Language;
 
   private imageUrl = 'https://image.tmdb.org/t/p/';
@@ -32,6 +35,7 @@ class API {
     this.movies = new MovieService(this.$http);
     this.tv = new TVService(this.$http);
     this.account = new AccountService(this.$http);
+    this.genre = new GenreService(this.$http);
   }
 
   setLanguage(l: Language) {
