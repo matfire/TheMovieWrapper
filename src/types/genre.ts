@@ -5,4 +5,4 @@ interface GenreResult {
     }[]
 }
 
-export {GenreResult}
+export default GenreResult;

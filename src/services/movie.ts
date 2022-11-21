@@ -1,6 +1,6 @@
 import {
   GenericListResult,
-  KeywordResult, Language, Response, TrendingTimeSpan, Video,
+  KeywordResult, Language, Response, TrendingTimeSpan,
 } from '../types/generic';
 import GenericService from '../types/genericService';
 import {
@@ -24,8 +24,6 @@ import {
   CreditsResult,
   AccountStatesResult,
   Movie,
-  Keyword,
-  MovieReview,
 } from '../types/movie';
 
 class MovieService extends GenericService {
