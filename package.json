@@ -1,6 +1,6 @@
 {
   "name": "@matfire/the_movie_wrapper",
-  "version": "0.7.8",
+  "version": "0.8.0",
   "description": "",
   "repository": {
     "url": "git+https://github.com/matfire/TheMovieWrapper",
@@ -25,7 +25,7 @@
   ],
   "module": "dist/index.mjs",
   "main": "dist/index.mjs",
-  "typings": "dist/index.d.ts",
+  "typings": "dist/index.d.mts",
   "author": "Matteo Gassend",
   "license": "MIT",
   "devDependencies": {
